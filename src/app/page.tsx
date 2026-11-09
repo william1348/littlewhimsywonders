@@ -15,7 +15,8 @@ export default function HomePage() {
         <div>
           <p className="text-xs tracking-[0.18em] text-oxide uppercase">Art by Rene Kiss | Denver, CO</p>
           <h1 className="mt-4 max-w-xl font-heading text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-            Art pieces from a small north-light studio.
+            <span className="block">A world of whimsy through multi-medium art🌿</span>
+            <span className="mt-2 block text-4xl sm:text-5xl">Bringing a touch of magic to everyday life ✨</span>
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Browse the collection, open each piece for full details, and send a purchase request directly from the piece page.
