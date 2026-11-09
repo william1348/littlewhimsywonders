@@ -30,11 +30,10 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <aside className="flex flex-col justify-end gap-4 border-t border-border pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8">
-          <p className="font-heading text-2xl leading-snug">Detail first, then purchase.</p>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            Every piece has its own page with size, edition, year, and material details. Use the purchase form there and the studio replies with delivery and payment steps.
-          </p>
+        <aside className="border-t border-border pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8">
+          <div className="flex aspect-[4/5] w-full items-center justify-center rounded-2xl bg-secondary text-sm text-muted-foreground ring-1 ring-foreground/10">
+            Placeholder image
+          </div>
         </aside>
       </section>
 
