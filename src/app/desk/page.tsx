@@ -4,7 +4,7 @@ import { DeskBoard } from "@/components/desk-board";
 
 export const metadata: Metadata = {
   title: "Desk",
-  description: "Mailing list and hold requests for North Room.",
+  description: "Mailing list and hold requests for Little Whimsy Wonders.",
 };
 
 export default function DeskPage() {

@@ -92,7 +92,7 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
               notePlaceholder="Share delivery city, timing, or pickup preference."
               submitLabel="Send purchase request"
               savingLabel="Sending request…"
-              helperText="Checkout does not happen on this page. North Room replies to confirm availability, shipping cost, and payment."
+              helperText="Checkout does not happen on this page. Little Whimsy Wonders replies to confirm availability, shipping cost, and payment."
             />
           </div>
         </div>

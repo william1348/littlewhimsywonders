@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   }
 
   return json({
-    message: "Hold requested. North Room will write back about shipping and payment.",
+    message: "Hold requested. Little Whimsy Wonders will write back about shipping and payment.",
     storage: storageMode(),
   });
 }

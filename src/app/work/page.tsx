@@ -5,7 +5,7 @@ import { pieces } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Art Pieces",
-  description: "Art pieces currently available from the North Room studio.",
+  description: "Art pieces currently available from the Little Whimsy Wonders studio.",
 };
 
 export default function WorkPage() {

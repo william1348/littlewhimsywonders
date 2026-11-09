@@ -17,7 +17,7 @@ type BagContextValue = {
 };
 
 const BagContext = createContext<BagContextValue | null>(null);
-const storageKey = "north-room-bag";
+const storageKey = "little-whimsy-wonders-bag";
 
 export function BagProvider({ children }: { children: ReactNode }) {
   const [slugs, setSlugs] = useState<string[]>([]);

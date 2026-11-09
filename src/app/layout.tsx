@@ -19,8 +19,8 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   title: {
-    default: "North Room",
-    template: "%s · North Room",
+    default: "Little Whimsy Wonders",
+    template: "%s · Little Whimsy Wonders",
   },
   description:
     "Browse art pieces from a one-person studio, open detailed piece pages, send purchase requests, and join the mailing list.",

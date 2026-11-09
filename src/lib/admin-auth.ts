@@ -4,7 +4,7 @@ import { createHash, timingSafeEqual } from "node:crypto";
 
 const ADMIN_COOKIE = "north_room_admin";
 const SESSION_MAX_AGE = 60 * 60 * 8;
-const SESSION_PREFIX = "north-room-admin-v1";
+const SESSION_PREFIX = "little-whimsy-wonders-admin-v1";
 
 export function adminPasswordConfigured(): boolean {
   return adminPassword().length > 0;

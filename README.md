@@ -1,4 +1,4 @@
-# North Room
+# Little Whimsy Wonders
 
 A one-person print studio site. Browse the work, request a hold, and leave an email for the next edition. Hold requests and mailing-list addresses are stored for the studio.
 

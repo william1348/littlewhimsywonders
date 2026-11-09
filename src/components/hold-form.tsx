@@ -15,7 +15,7 @@ export function HoldForm({
   notePlaceholder = "Where it should ship, or when you can pick it up.",
   submitLabel = "Request a hold",
   savingLabel = "Sending…",
-  helperText = "Nothing is charged here. North Room writes back about shipping and payment. If the piece is gone, you hear that too.",
+  helperText = "Nothing is charged here. Little Whimsy Wonders writes back about shipping and payment. If the piece is gone, you hear that too.",
 }: {
   pieces: { slug: string; title: string }[];
   idPrefix?: string;

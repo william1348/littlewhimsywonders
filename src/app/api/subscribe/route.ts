@@ -24,7 +24,7 @@ export async function POST(request: Request) {
   }
 
   return json({
-    message: "You're on the list. North Room writes when a new edition is pulled.",
+    message: "You're on the list. Little Whimsy Wonders writes when a new edition is pulled.",
     storage: storageMode(),
   });
 }

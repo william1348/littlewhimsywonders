@@ -4,7 +4,7 @@ import { ListForm } from "@/components/list-form";
 
 export const metadata: Metadata = {
   title: "Studio",
-  description: "A note from North Room, and the mailing list for the next edition.",
+  description: "A note from Little Whimsy Wonders, and the mailing list for the next edition.",
 };
 
 export default function StudioPage() {
@@ -15,7 +15,7 @@ export default function StudioPage() {
         <h1 className="mt-3 font-heading text-5xl tracking-tight">One room, north light.</h1>
         <div className="mt-6 flex flex-col gap-4 leading-relaxed text-muted-foreground">
           <p>
-            North Room is a rented room with a north window, a drying rack, and a table that is never clear. The prints are short editions. When a drawing is better than the print it would become, the drawing is for sale instead.
+            Little Whimsy Wonders is a rented room with a north window, a drying rack, and a table that is never clear. The prints are short editions. When a drawing is better than the print it would become, the drawing is for sale instead.
           </p>
           <p>
             Visits are by note, and only when a piece is being picked up. The studio does not publish a street address.
