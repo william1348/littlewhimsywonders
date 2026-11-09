@@ -7,8 +7,10 @@ import { BagButton } from "@/components/bag";
 import { HoldForm } from "@/components/hold-form";
 import { PrintArt } from "@/components/print-art";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { getPiece, pieces } from "@/lib/catalog";
 import { formatPrice } from "@/lib/format";
+import { cn } from "cn";
 
 export function generateStaticParams() {
   return pieces.map((piece) => ({ slug: piece.slug }));
@@ -68,13 +70,27 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
         </dl>
         <p className="leading-relaxed">{piece.description}</p>
         <div className="flex flex-wrap items-center gap-3">
+          <a href="#purchase-form" className={cn(buttonVariants({ size: "lg" }), "h-11 rounded-lg px-4")}>
+            Purchase this piece
+          </a>
           <BagButton piece={piece} />
           <Badge variant="outline">{piece.kind === "original" ? "Leaves once" : piece.edition}</Badge>
         </div>
-        <div className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
-          <h2 className="font-heading text-2xl tracking-tight">Request a hold</h2>
+        <div id="purchase-form" className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
+          <h2 className="font-heading text-2xl tracking-tight">Purchase this piece</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Send your details and we will reply with delivery timing and payment instructions.
+          </p>
           <div className="mt-4">
-            <HoldForm pieces={[{ slug: piece.slug, title: piece.title }]} />
+            <HoldForm
+              pieces={[{ slug: piece.slug, title: piece.title }]}
+              idPrefix="purchase"
+              noteLabel="Purchase note"
+              notePlaceholder="Share delivery city, timing, or pickup preference."
+              submitLabel="Send purchase request"
+              savingLabel="Sending request…"
+              helperText="Checkout does not happen on this page. North Room replies to confirm availability, shipping cost, and payment."
+            />
           </div>
         </div>
         <Link href="/work" className="text-sm text-muted-foreground underline-offset-4 hover:underline">

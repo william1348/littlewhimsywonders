@@ -26,6 +26,12 @@ export function PieceCard({ piece }: { piece: Piece }) {
         <span aria-hidden="true"> · </span>
         {piece.size}
       </p>
+      <Link
+        href={`/work/${piece.slug}`}
+        className="w-fit text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+      >
+        View details and purchase
+      </Link>
     </article>
   );
 }

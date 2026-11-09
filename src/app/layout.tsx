@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s · North Room",
   },
   description:
-    "Prints and a few originals from a one-person studio. Request a hold, or leave an address for the next edition.",
+    "Browse art pieces from a one-person studio, open detailed piece pages, send purchase requests, and join the mailing list.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -11,9 +11,19 @@ import { postJson } from "@/lib/client-api";
 export function HoldForm({
   pieces,
   idPrefix = "hold",
+  noteLabel = "Note",
+  notePlaceholder = "Where it should ship, or when you can pick it up.",
+  submitLabel = "Request a hold",
+  savingLabel = "Sending…",
+  helperText = "Nothing is charged here. North Room writes back about shipping and payment. If the piece is gone, you hear that too.",
 }: {
   pieces: { slug: string; title: string }[];
   idPrefix?: string;
+  noteLabel?: string;
+  notePlaceholder?: string;
+  submitLabel?: string;
+  savingLabel?: string;
+  helperText?: string;
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -79,7 +89,7 @@ export function HoldForm({
         </div>
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor={`${idPrefix}-message`}>Note</Label>
+        <Label htmlFor={`${idPrefix}-message`}>{noteLabel}</Label>
         <Textarea
           id={`${idPrefix}-message`}
           name="message"
@@ -87,17 +97,15 @@ export function HoldForm({
           maxLength={2000}
           value={message}
           onChange={(event) => setMessage(event.target.value)}
-          placeholder="Where it should ship, or when you can pick it up."
+          placeholder={notePlaceholder}
           className="min-h-28 bg-card px-3"
           aria-invalid={status === "error"}
         />
       </div>
       <Button type="submit" size="lg" className="h-11 w-fit rounded-lg px-4" disabled={status === "saving" || pieces.length === 0}>
-        {status === "saving" ? "Sending…" : "Request a hold"}
+        {status === "saving" ? savingLabel : submitLabel}
       </Button>
-      <p className="text-sm text-muted-foreground">
-        Nothing is charged here. North Room writes back about shipping and payment. If the piece is gone, you hear that too.
-      </p>
+      <p className="text-sm text-muted-foreground">{helperText}</p>
       {note ? (
         <p role={status === "error" ? "alert" : "status"} className={status === "error" ? "text-sm text-oxide" : "text-sm"}>
           {note}
