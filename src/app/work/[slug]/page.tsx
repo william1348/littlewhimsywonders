@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
 import { BagButton } from "@/components/bag";
@@ -37,6 +37,9 @@ export default function PiecePage({ params }: { params: Promise<{ slug: string }
 
 async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  if (slug === "admin") {
+    redirect("/admin");
+  }
   const piece = getPiece(slug);
   if (!piece) notFound();
 
