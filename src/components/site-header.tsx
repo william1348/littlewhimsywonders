@@ -11,6 +11,7 @@ const links = [
   { href: "/studio", label: "Studio" },
   { href: "/desk", label: "Desk" },
 ];
+const instagramUrl = "https://www.instagram.com/littlewhimsywonders/";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -39,6 +40,14 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+          >
+            Instagram
+          </a>
           <BagSheet />
         </nav>
       </div>
