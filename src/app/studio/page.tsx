@@ -28,7 +28,7 @@ export default function StudioPage() {
       <section className="h-fit rounded-xl bg-card p-6 ring-1 ring-foreground/10">
         <h2 className="font-heading text-3xl tracking-tight">The list</h2>
         <p className="mt-2 mb-6 text-sm text-muted-foreground">
-          Leave an address. It is kept for the studio and shown on the desk, not passed on.
+          Leave an address. It is kept for the studio and shown on the admin page, not passed on.
         </p>
         <ListForm />
       </section>

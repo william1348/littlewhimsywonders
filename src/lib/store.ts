@@ -75,7 +75,7 @@ export class StoreError extends Error {
 }
 
 export function storageMode(): StorageMode {
-  return process.env.DATABASE_URL ? "database" : "local-file";
+  return databaseUrl() ? "database" : "local-file";
 }
 
 export async function addSubscriber(input: { email: string; source: string; stage: Stage }): Promise<void> {
@@ -194,7 +194,7 @@ export function storeFailureResponse(error: unknown): Response {
 }
 
 async function database(): Promise<Pool | null> {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = databaseUrl();
   if (!connectionString) return null;
   if (!globalForPg.northRoomPool) {
     globalForPg.northRoomPool = new Pool({
@@ -215,6 +215,11 @@ async function database(): Promise<Pool | null> {
   }
   await globalForPg.northRoomSchema;
   return active;
+}
+
+function databaseUrl(): string | null {
+  // Use pooled URL for app traffic; fall back to unpooled when needed.
+  return process.env.DATABASE_URL ?? process.env.DATABASE_URL_UNPOOLED ?? null;
 }
 
 function withFile<T>(fn: (data: FileDb) => Promise<T> | T): Promise<T> {

@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local mailing list when DATABASE_URL is unset
 /data
+.neon
+.agents/
+skills-lock.json
