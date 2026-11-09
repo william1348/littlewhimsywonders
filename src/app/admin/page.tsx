@@ -4,7 +4,7 @@ import { AdminEmailBoard } from "@/components/admin-email-board";
 
 export const metadata: Metadata = {
   title: "Admin",
-  description: "Password-protected list of saved email addresses.",
+  description: "List of saved email addresses.",
 };
 
 export default function AdminPage() {
