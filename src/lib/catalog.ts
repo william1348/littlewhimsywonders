@@ -1,4 +1,5 @@
 export type PieceKind = "print" | "original";
+export type CollectionTag = "Boos" | "Hats" | "Other" | "Globes";
 
 export type Piece = {
   slug: string;
@@ -11,6 +12,13 @@ export type Piece = {
   year: number;
   summary: string;
   description: string;
+};
+
+export type Collection = {
+  slug: string;
+  title: string;
+  tags: CollectionTag[];
+  items: string[];
 };
 
 export const pieces: Piece[] = [
@@ -117,6 +125,23 @@ export const pieces: Piece[] = [
     summary: "The north window in four panes, and a stem in the lower one.",
     description:
       "Morning, before the coffee. The stem is a cutting that did take.",
+  },
+];
+
+export const collectionTags: CollectionTag[] = ["Boos", "Hats", "Other", "Globes"];
+
+export const collections: Collection[] = [
+  {
+    slug: "little-boo-boos",
+    title: "Little Boo Boos",
+    tags: ["Boos", "Globes"],
+    items: ["Boos in a Bottle", "Boo Ornament", "Till Death Snowglobe Boos"],
+  },
+  {
+    slug: "whimsy-hatbox",
+    title: "Whimsy Hatbox",
+    tags: ["Hats", "Other"],
+    items: ["Moonlight Boo Hat", "Witchy Ribbon Cap", "Pocket Parade Topper"],
   },
 ];
 
