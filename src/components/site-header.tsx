@@ -22,7 +22,10 @@ export function SiteHeader() {
           />
           <span>
             <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
-            <span className="mt-2 block text-xs tracking-[0.18em] text-copper uppercase">Rene Kiss | Handmade in Colorado</span>
+            <span className="mt-2 block text-xs tracking-[0.18em] text-copper uppercase">
+              <span className="ml-[1.5px] inline-block">Rene Kiss | </span>
+              Handmade in Colorado
+            </span>
           </span>
         </Link>
         <nav aria-label="Studio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
