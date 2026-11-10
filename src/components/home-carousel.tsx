@@ -133,8 +133,8 @@ export function HomeCarousel() {
             </button>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-linear-to-b from-page to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-page to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-linear-to-b from-page to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-page to-transparent" />
       </section>
 
       {slide ? <GalleryView slide={slide} titleId={titleId} onClose={close} onPrev={() => go(-1)} onNext={() => go(1)} /> : null}
