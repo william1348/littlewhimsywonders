@@ -50,6 +50,17 @@ export default function HomePage() {
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {homeCollections.map((collection) => (
             <article key={collection.slug} className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
+              <Link
+                href={`/collections/${collection.slug}`}
+                className="mb-4 block overflow-hidden rounded-lg ring-1 ring-foreground/10"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={collection.items[0]?.image}
+                  alt={collection.items[0]?.title ?? collection.title}
+                  className="h-72 w-full object-cover transition-transform duration-300 hover:scale-[1.02] sm:h-80"
+                />
+              </Link>
               <p className="text-xs tracking-[0.16em] text-muted-foreground uppercase">{collection.tags.join(" · ")}</p>
               <h3 className="mt-2 font-heading text-3xl tracking-tight">{collection.title}</h3>
               <ul className="mt-4 list-disc space-y-1 pl-5 text-sm">
