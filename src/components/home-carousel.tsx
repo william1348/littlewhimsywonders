@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useId, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 import { gallerySlides, type GallerySlide } from "@/lib/gallery";
@@ -9,12 +9,77 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "cn";
 
 const LOOP = [...gallerySlides, ...gallerySlides];
+const FULL_SPEED = 36;
+const SPEED_MS = 500;
 
 export function HomeCarousel() {
   const titleId = useId();
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+  const speedRef = useRef(FULL_SPEED);
+  const fromSpeedRef = useRef(FULL_SPEED);
+  const toSpeedRef = useRef(FULL_SPEED);
+  const speedStartedRef = useRef(0);
+  const pausedRef = useRef(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const open = openIndex !== null;
   const slide = openIndex === null ? null : gallerySlides[openIndex];
+  const openRef = useRef(open);
+  openRef.current = open;
+
+  const setPaused = useCallback((next: boolean) => {
+    if (pausedRef.current === next) return;
+    pausedRef.current = next;
+    fromSpeedRef.current = speedRef.current;
+    toSpeedRef.current = next ? 0 : FULL_SPEED;
+    speedStartedRef.current = performance.now();
+  }, []);
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setPaused(true);
+      speedRef.current = 0;
+      toSpeedRef.current = 0;
+      return;
+    }
+
+    function onMove(event: MouseEvent) {
+      const x = event.clientX / window.innerWidth;
+      setPaused(openRef.current || (x >= 0.25 && x <= 0.75));
+    }
+
+    window.addEventListener("mousemove", onMove);
+
+    let frame = 0;
+    let last = performance.now();
+    function tick(now: number) {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      const t = Math.min(1, (now - speedStartedRef.current) / SPEED_MS);
+      const eased = 1 - (1 - t) * (1 - t);
+      speedRef.current = fromSpeedRef.current + (toSpeedRef.current - fromSpeedRef.current) * eased;
+      offsetRef.current += speedRef.current * dt;
+      const loopWidth = (trackRef.current?.scrollWidth ?? 0) / 2;
+      if (loopWidth > 0 && offsetRef.current >= loopWidth) {
+        offsetRef.current -= loopWidth;
+      }
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
+      }
+      frame = requestAnimationFrame(tick);
+    }
+    frame = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(frame);
+    };
+  }, [setPaused]);
+
+  useEffect(() => {
+    setPaused(open);
+  }, [open, setPaused]);
 
   const close = useCallback(() => setOpenIndex(null), []);
   const go = useCallback((direction: -1 | 1) => {
@@ -42,22 +107,26 @@ export function HomeCarousel() {
 
   return (
     <>
-      <section aria-label="Studio photos" className={cn("group/carousel relative h-[320px] w-full overflow-hidden", open && "gallery-marquee-paused")}>
-        <div className="gallery-marquee-track flex h-full w-max group-hover/carousel:[animation-play-state:paused]">
+      <section aria-label="Studio photos" className="relative h-[320px] w-full overflow-hidden">
+        <div ref={trackRef} className="flex h-full w-max will-change-transform">
           {LOOP.map((item, index) => (
             <button
               key={`${item.src}-${index}`}
               type="button"
-              className="relative h-full shrink-0 cursor-zoom-in overflow-hidden"
+              className="group/slide relative h-full shrink-0 cursor-zoom-in overflow-hidden"
               onClick={() => setOpenIndex(index % gallerySlides.length)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={item.src} alt={item.alt} className="h-full w-auto max-w-none object-cover" />
+              <span className="absolute inset-0 bg-page/20 transition-opacity duration-500 group-hover/slide:opacity-0" />
+              <span className="pointer-events-none absolute right-2 bottom-2 rounded-md bg-page/95 px-2 py-1 text-xs tracking-wide text-burgundy opacity-0 shadow-none transition-opacity duration-500 group-hover/slide:opacity-100">
+                {item.title}
+              </span>
             </button>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-page/30" />
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-page via-transparent to-page" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-b from-page to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-page to-transparent" />
       </section>
 
       {slide ? <GalleryView slide={slide} titleId={titleId} onClose={close} onPrev={() => go(-1)} onNext={() => go(1)} /> : null}
@@ -130,7 +199,14 @@ function GalleryView({
             Browse the work
           </Link>
         )}
-        <button type="button" onClick={onClose} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-11 rounded-lg px-4 border-page/40 bg-transparent text-page hover:bg-white/10 hover:text-page")}>
+        <button
+          type="button"
+          onClick={onClose}
+          className={cn(
+            buttonVariants({ variant: "outline", size: "lg" }),
+            "h-11 rounded-lg border-page/40 bg-transparent px-4 text-page hover:bg-white/10 hover:text-page",
+          )}
+        >
           Close
         </button>
       </div>

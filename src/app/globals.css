@@ -137,26 +137,3 @@
     @apply font-sans;
   }
 }
-
-@keyframes gallery-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.gallery-marquee-track {
-  animation: gallery-marquee 48s linear infinite;
-}
-
-.gallery-marquee-paused .gallery-marquee-track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gallery-marquee-track {
-    animation: none;
-  }
-}
