@@ -1,0 +1,23 @@
+---
+description: Always commit and push after making changes so git and the local preview stay in sync
+alwaysApply: true
+---
+
+# Commit and push after every change
+
+This repo should land on git as soon as work is done. Do not wait to be asked.
+
+After you finish a set of changes:
+
+1. Commit them on the current branch with a short message that explains why.
+2. Push to `origin` on that same branch (`git push -u origin HEAD` if it has no upstream yet).
+3. Tell the user they can refresh `http://127.0.0.1:3847` to see the update. The local Next.js server already runs there.
+
+This overrides the usual "only commit when asked" and "do not push unless asked" rules **for this project only**.
+
+Still follow git safety:
+
+- Never commit `.env` files, credentials, or `data/local-store.json`
+- Never force-push, skip hooks, or amend a commit that was already pushed
+- Never change git config
+- If there is nothing to commit, skip the commit and still confirm the branch is pushed
