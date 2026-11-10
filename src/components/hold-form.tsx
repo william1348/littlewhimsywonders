@@ -107,7 +107,7 @@ export function HoldForm({
       </Button>
       <p className="text-sm text-muted-foreground">{helperText}</p>
       {note ? (
-        <p role={status === "error" ? "alert" : "status"} className={status === "error" ? "text-sm text-oxide" : "text-sm"}>
+        <p role={status === "error" ? "alert" : "status"} className={status === "error" ? "text-sm text-copper" : "text-sm"}>
           {note}
         </p>
       ) : null}

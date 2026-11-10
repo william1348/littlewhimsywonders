@@ -33,7 +33,7 @@ export function SiteHeader() {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "text-sm underline-offset-4 hover:underline",
-                  active ? "text-foreground underline decoration-oxide decoration-2" : "text-muted-foreground",
+                  active ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
                 )}
               >
                 {link.label}

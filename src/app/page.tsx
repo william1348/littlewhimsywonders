@@ -13,7 +13,7 @@ export default function HomePage() {
     <main>
       <section className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.3fr_0.7fr] md:py-24">
         <div>
-          <p className="text-xs tracking-[0.18em] text-oxide uppercase">Art by Rene Kiss | Denver, CO</p>
+          <p className="text-xs tracking-[0.18em] text-copper uppercase">Art by Rene Kiss | Denver, CO</p>
           <h1 className="mt-4 max-w-xl font-heading text-5xl leading-[0.95] tracking-tight sm:text-6xl">
             <span className="block">A world of whimsy through multi-medium art🌿</span>
             <span className="mt-2 block text-4xl sm:text-5xl">Bringing a touch of magic to everyday life ✨</span>
@@ -54,7 +54,7 @@ export default function HomePage() {
       <section className="mx-auto w-full max-w-6xl px-5 pb-20">
         <div className="grid gap-8 rounded-2xl bg-card p-6 ring-1 ring-foreground/10 md:grid-cols-[1fr_1.1fr] md:p-8">
           <div>
-            <p className="text-xs tracking-[0.18em] text-oxide uppercase">Mailing list</p>
+            <p className="text-xs tracking-[0.18em] text-copper uppercase">Mailing list</p>
             <h2 className="mt-3 font-heading text-4xl tracking-tight">Join the list</h2>
             <p className="mt-4 max-w-md text-muted-foreground">
               Get a short note when new art pieces are released. No weekly newsletter and no sharing your address.
