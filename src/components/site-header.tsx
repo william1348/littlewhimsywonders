@@ -21,7 +21,11 @@ export function SiteHeader() {
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
         <Link href="/" className="group flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/ghost-mushroom.png" alt="" className="h-14 w-auto" />
+          <img
+            src="/img/ghost-mushroom.png"
+            alt=""
+            className="h-16 w-auto [filter:brightness(1.14)_drop-shadow(0_0_0.7px_rgba(34,10,4,0.45))_drop-shadow(0_1px_2px_rgba(82,32,40,0.22))]"
+          />
           <span>
             <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
             <span className="mt-1 block text-xs tracking-[0.18em] text-copper uppercase">Art by Rene Kiss | Denver, CO</span>
