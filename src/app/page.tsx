@@ -15,7 +15,7 @@ export default function HomePage() {
         <div>
           <h1 className="max-w-xl font-heading text-4xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
             <span className="block text-green">A world of whimsy through multi-medium art</span>
-            <span className="mt-2 block text-2xl text-copper sm:text-3xl">Bringing a touch of magic through everyday life</span>
+            <span className="mt-2 block text-xl text-copper sm:text-2xl">Bringing a touch of magic through everyday life</span>
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Browse the collection, open each piece for full details, and send a purchase request directly from the piece page.
