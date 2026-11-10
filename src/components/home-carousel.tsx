@@ -14,6 +14,7 @@ const SPEED_MS = 500;
 
 export function HomeCarousel() {
   const titleId = useId();
+  const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const speedRef = useRef(FULL_SPEED);
@@ -45,8 +46,15 @@ export function HomeCarousel() {
     }
 
     function onMove(event: MouseEvent) {
-      const x = event.clientX / window.innerWidth;
-      setPaused(openRef.current || (x >= 0.25 && x <= 0.75));
+      const rect = sectionRef.current?.getBoundingClientRect();
+      const overCarousel =
+        !!rect &&
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom;
+      const inMiddle = event.clientX / window.innerWidth >= 0.25 && event.clientX / window.innerWidth <= 0.75;
+      setPaused(openRef.current || (overCarousel && inMiddle));
     }
 
     window.addEventListener("mousemove", onMove);
@@ -107,7 +115,7 @@ export function HomeCarousel() {
 
   return (
     <>
-      <section aria-label="Studio photos" className="relative h-[320px] w-full overflow-hidden">
+      <section ref={sectionRef} aria-label="Studio photos" className="relative h-[320px] w-full overflow-hidden">
         <div ref={trackRef} className="flex h-full w-max will-change-transform">
           {LOOP.map((item, index) => (
             <button
@@ -118,15 +126,15 @@ export function HomeCarousel() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={item.src} alt={item.alt} className="h-full w-auto max-w-none object-cover" />
-              <span className="absolute inset-0 bg-page/20 transition-opacity duration-500 group-hover/slide:opacity-0" />
+              <span className="absolute inset-0 bg-page/25 transition-opacity duration-500 group-hover/slide:opacity-0" />
               <span className="pointer-events-none absolute right-2 bottom-2 rounded-md bg-page/95 px-2 py-1 text-xs tracking-wide text-burgundy opacity-0 shadow-none transition-opacity duration-500 group-hover/slide:opacity-100">
                 {item.title}
               </span>
             </button>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-b from-page to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-page to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-linear-to-b from-page to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-page to-transparent" />
       </section>
 
       {slide ? <GalleryView slide={slide} titleId={titleId} onClose={close} onPrev={() => go(-1)} onNext={() => go(1)} /> : null}
