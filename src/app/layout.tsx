@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s · Little Whimsy Wonders",
   },
   description:
-    "A world of whimsy through multi-medium art. Bringing a touch of magic through everyday life. Browse the collection, send a purchase request, and join the list.",
+    "A world of whimsy through multi-medium art. Bringing a touch of magic into everyday life. Browse the collection, send a purchase request, and join the list.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
