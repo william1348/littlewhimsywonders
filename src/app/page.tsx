@@ -62,7 +62,9 @@ export default function HomePage() {
                 />
               </Link>
               <h3 className="font-heading text-3xl tracking-tight">{collection.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">{collection.description}</p>
+              <p className="mt-3 rounded-md bg-background/95 px-3 py-2 text-sm leading-6 text-green ring-1 ring-foreground/8">
+                {collection.description}
+              </p>
               <Link
                 href={`/collections/${collection.slug}`}
                 className="mt-4 inline-block text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
