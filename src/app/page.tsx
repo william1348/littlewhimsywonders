@@ -69,8 +69,8 @@ export default function HomePage() {
                   className="h-72 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] sm:h-80"
                 />
               </div>
-              <h3 className="font-heading text-3xl tracking-tight">{collection.title}</h3>
-              <p className="mt-3 rounded-md bg-background/95 px-3 py-2 text-sm leading-6 text-green ring-1 ring-foreground/8">
+              <h3 className="font-heading text-[1.75rem] tracking-tight text-burgundy">{collection.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-copper/85">
                 {collection.description}
               </p>
             </Link>
