@@ -13,7 +13,7 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="mx-auto grid w-full max-w-6xl gap-10 px-5 pt-3 pb-8 md:grid-cols-[1.3fr_0.7fr] md:pb-12">
+      <section className="mx-auto grid w-full max-w-6xl items-stretch gap-10 px-5 pt-3 pb-8 md:grid-cols-[1.3fr_0.7fr] md:pb-12">
         <div>
           <h1 className="max-w-xl font-heading text-4xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
             <span className="block text-green">A world of whimsy through multi-medium art</span>
@@ -32,8 +32,13 @@ export default function HomePage() {
           </div>
         </div>
         <aside className="border-t border-border pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8">
-          <div className="flex aspect-[4/5] w-full items-center justify-center rounded-2xl bg-secondary text-sm text-muted-foreground ring-1 ring-foreground/10">
-            Placeholder image
+          <div className="relative h-64 md:h-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/rene-kiss-studio.jpg"
+              alt="Rene Kiss at work, handmade in Colorado"
+              className="absolute inset-0 h-full w-full rounded-2xl object-cover ring-1 ring-foreground/10"
+            />
           </div>
         </aside>
       </section>
