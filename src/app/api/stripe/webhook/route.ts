@@ -37,6 +37,11 @@ export async function POST(request: Request) {
       const session = event.data.object as Stripe.Checkout.Session;
       await saveOrder(session, "failed");
     }
+
+    if (event.type === "checkout.session.expired") {
+      const session = event.data.object as Stripe.Checkout.Session;
+      await saveOrder(session, "failed");
+    }
   } catch (error) {
     return storeFailureResponse(error);
   }

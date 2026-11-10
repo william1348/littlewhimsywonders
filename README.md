@@ -30,6 +30,8 @@ Set these environment variables before using card checkout:
 
 - `STRIPE_SECRET_KEY` (required for `/api/checkout`)
 - `STRIPE_WEBHOOK_SECRET` (required for `/api/stripe/webhook` to persist paid/failed checkout status)
+- `STRIPE_SHIPPING_COUNTRIES` (optional, comma-separated ISO country codes, for example `US,CA`)
+- `STRIPE_TAX_CODE` (optional, Stripe product tax code applied to checkout line items)
 
 Then configure a Stripe webhook endpoint to:
 
@@ -40,3 +42,4 @@ Enable these events in Stripe:
 - `checkout.session.completed`
 - `checkout.session.async_payment_succeeded`
 - `checkout.session.async_payment_failed`
+- `checkout.session.expired`

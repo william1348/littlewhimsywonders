@@ -39,11 +39,15 @@ export async function POST(request: Request) {
   const stripe = new Stripe(secretKey);
   const baseUrl = requestBaseUrl(request);
   const returnPath = piece ? `/work/${piece.slug}` : `/collections/${collectionSlug}`;
+  const allowedShippingCountries = shippingCountries();
+  const taxCode = stripeTaxCode();
 
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer_creation: "always",
+      automatic_tax: { enabled: true },
+      billing_address_collection: "required",
       line_items: [
         {
           quantity: 1,
@@ -53,10 +57,12 @@ export async function POST(request: Request) {
             product_data: {
               name: title,
               description: summary,
+              ...(taxCode ? { tax_code: taxCode } : {}),
             },
           },
         },
       ],
+      ...(allowedShippingCountries ? { shipping_address_collection: { allowed_countries: allowedShippingCountries } } : {}),
       metadata: {
         stage: defaultStage(),
         itemTitle: title,
@@ -82,4 +88,19 @@ function requestBaseUrl(request: Request): string {
   const proto = request.headers.get("x-forwarded-proto") ?? (host?.startsWith("localhost") || host?.startsWith("127.0.0.1") ? "http" : "https");
   if (!host) return "http://127.0.0.1:3847";
   return `${proto}://${host}`;
+}
+
+function stripeTaxCode(): string | null {
+  const value = process.env.STRIPE_TAX_CODE?.trim();
+  return value ? value : null;
+}
+
+function shippingCountries(): Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[] | null {
+  const raw = process.env.STRIPE_SHIPPING_COUNTRIES?.trim();
+  if (!raw) return null;
+  const countries = raw
+    .split(",")
+    .map((value) => value.trim().toUpperCase())
+    .filter((value): value is Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry => Boolean(value));
+  return countries.length > 0 ? countries : null;
 }
