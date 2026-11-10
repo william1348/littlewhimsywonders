@@ -5,6 +5,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 import { gallerySlides, type GallerySlide } from "@/lib/gallery";
+import { GALLERY_BG_FALLBACK, galleryBackgroundFromImage } from "@/lib/gallery-background";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "cn";
 
@@ -155,12 +156,40 @@ function GalleryView({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [background, setBackground] = useState(GALLERY_BG_FALLBACK);
+
+  useEffect(() => {
+    const image = imageRef.current;
+    if (!image) return;
+    let cancelled = false;
+
+    function apply() {
+      if (!image) return;
+      void galleryBackgroundFromImage(image).then((color) => {
+        if (!cancelled) setBackground(color);
+      });
+    }
+
+    if (image.complete && image.naturalWidth > 0) {
+      apply();
+    } else {
+      image.addEventListener("load", apply);
+    }
+
+    return () => {
+      cancelled = true;
+      image.removeEventListener("load", apply);
+    };
+  }, [slide.src]);
+
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
-      className="fixed inset-0 z-50 flex flex-col bg-linework text-page"
+      className="fixed inset-0 z-50 flex flex-col text-page transition-colors duration-500"
+      style={{ backgroundColor: background }}
     >
       <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <h2 id={titleId} className="font-heading text-xl tracking-tight sm:text-2xl">
@@ -186,7 +215,13 @@ function GalleryView({
           <ChevronLeft className="size-8" />
         </button>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={slide.src} alt={slide.alt} className="max-h-full max-w-full object-contain" />
+        <img
+          ref={imageRef}
+          src={slide.src}
+          alt={slide.alt}
+          crossOrigin="anonymous"
+          className="max-h-full max-w-full object-contain"
+        />
         <button
           type="button"
           onClick={onNext}
