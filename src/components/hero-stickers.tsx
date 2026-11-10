@@ -57,7 +57,7 @@ export function HeroStickers() {
               )}
             />
             {portrait.bubble ? (
-              <div className="pointer-events-none absolute top-0 left-0 w-[6.75rem] -rotate-6 md:-left-3 md:w-[7.5rem]">
+              <div className="pointer-events-none absolute top-0 left-8 w-[6.75rem] -rotate-6 md:left-6 md:w-[7.5rem]">
                 <svg
                   viewBox="0 0 240 150"
                   className="h-auto w-full overflow-visible"
