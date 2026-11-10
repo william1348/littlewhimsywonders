@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { Suspense } from "react";
 
+import { CheckoutStatusFromQuery } from "@/components/checkout-status-from-query";
 import { CollectionViewer } from "@/components/collection-viewer";
 import { collections, getCollection } from "@/lib/catalog";
 
@@ -23,7 +25,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function CollectionPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CollectionPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   if (slug === "customs-and-comissions") {
     redirect("/collections/customs-and-commissions");
@@ -38,6 +44,9 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
       <p className="mt-4 text-muted-foreground">
         Choose a thumbnail to preview the piece, then buy now or request a custom commission.
       </p>
+      <Suspense fallback={null}>
+        <CheckoutStatusFromQuery className="mt-4" />
+      </Suspense>
       <div className="mt-8">
         <CollectionViewer collection={collection} />
       </div>

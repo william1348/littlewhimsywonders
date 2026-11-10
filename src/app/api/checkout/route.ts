@@ -64,7 +64,7 @@ export async function POST(request: Request) {
         collectionSlug,
         itemId,
       },
-      success_url: `${baseUrl}${returnPath}?checkout=success`,
+      success_url: `${baseUrl}${returnPath}?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}${returnPath}?checkout=cancelled`,
     });
     if (!session.url) {

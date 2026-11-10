@@ -5,6 +5,7 @@ import { Suspense } from "react";
 
 import { BagButton } from "@/components/bag";
 import { CheckoutButton } from "@/components/checkout-button";
+import { CheckoutStatusFromQuery } from "@/components/checkout-status-from-query";
 import { HoldForm } from "@/components/hold-form";
 import { PrintArt } from "@/components/print-art";
 import { Badge } from "@/components/ui/badge";
@@ -28,7 +29,11 @@ export async function generateMetadata({
   return { title: piece.title, description: piece.summary };
 }
 
-export default function PiecePage({ params }: { params: Promise<{ slug: string }> }) {
+export default function PiecePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   return (
     <Suspense fallback={<main className="mx-auto w-full max-w-6xl px-5 py-16 text-muted-foreground">Opening the piece…</main>}>
       <PieceBody params={params} />
@@ -63,6 +68,9 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
           <p className="mt-4 text-lg text-muted-foreground">{piece.summary}</p>
         </div>
         <p className="font-heading text-3xl tabular-nums">{formatPrice(piece.price)}</p>
+        <Suspense fallback={null}>
+          <CheckoutStatusFromQuery />
+        </Suspense>
         <dl className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-muted-foreground">Edition</dt>
