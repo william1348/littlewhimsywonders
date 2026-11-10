@@ -18,10 +18,14 @@ export function SiteHeader() {
 
   return (
     <header className="border-b border-border bg-background">
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-end justify-between gap-4 px-5 py-5">
-        <Link href="/" className="group">
-          <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
-          <span className="mt-1 block text-xs tracking-[0.18em] text-copper uppercase">Art by Rene Kiss | Denver, CO</span>
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
+        <Link href="/" className="group flex items-center gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/img/ghost-mushroom.png" alt="" className="h-14 w-auto" />
+          <span>
+            <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
+            <span className="mt-1 block text-xs tracking-[0.18em] text-copper uppercase">Art by Rene Kiss | Denver, CO</span>
+          </span>
         </Link>
         <nav aria-label="Studio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
           {links.map((link) => {
