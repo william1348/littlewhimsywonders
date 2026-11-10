@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { HeroStickers } from "@/components/hero-stickers";
 import { HomeCarousel } from "@/components/home-carousel";
 import { ListForm } from "@/components/list-form";
+import { CommissionIcon } from "@/components/commission-icon";
 import { buttonVariants } from "@/components/ui/button";
 import { collections } from "@/lib/catalog";
 import { cn } from "cn";
@@ -28,11 +29,7 @@ export default function HomePage() {
             </Link>
             <Link href="/studio" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-11 rounded-lg px-4")}>
               <span className="inline-flex items-center gap-2">
-                <svg viewBox="0 0 24 24" className="size-[18px]" fill="none" aria-hidden="true">
-                  <path d="M4 18.5 15.5 7a2.1 2.1 0 0 1 3 0l.5.5a2.1 2.1 0 0 1 0 3L7.5 22H4z" stroke="currentColor" strokeWidth="1.8" />
-                  <path d="M13.5 9 16 11.5" stroke="currentColor" strokeWidth="1.8" />
-                  <path d="M3.5 4.5h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                </svg>
+                <CommissionIcon className="text-foreground/65" />
                 Commission an art piece
               </span>
             </Link>

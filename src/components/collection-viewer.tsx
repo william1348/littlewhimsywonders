@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { CheckoutButton } from "@/components/checkout-button";
+import { CommissionIcon } from "@/components/commission-icon";
 import { buttonVariants } from "@/components/ui/button";
 import type { Collection } from "@/lib/catalog";
 import { formatPrice } from "@/lib/format";
@@ -62,7 +63,10 @@ export function CollectionViewer({ collection }: { collection: Collection }) {
             href="/studio"
             className={cn(buttonVariants({ size: "lg" }), "h-11 rounded-lg bg-green px-4 font-light text-white hover:bg-green/90")}
           >
-            Order Custom / Commission
+            <span className="inline-flex items-center gap-2">
+              <CommissionIcon className="text-white/90" />
+              Order Custom / Commission
+            </span>
           </Link>
         </div>
       </div>
