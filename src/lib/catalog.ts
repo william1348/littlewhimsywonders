@@ -245,7 +245,7 @@ export const collections: Collection[] = [
   },
   {
     slug: "customs-and-comissions",
-    title: "Customs and Comissions",
+    title: "Customs & Comissions",
     description:
       "One-of-one made-to-order art designed around your ideas, colors, and memories, from ornaments to full scene pieces.",
     tags: ["Other"],
