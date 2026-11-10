@@ -43,9 +43,9 @@ export default function HomePage() {
 
       <section className="mx-auto w-full max-w-6xl px-5 pt-16 pb-20">
         <div className="mb-8 flex items-end justify-between gap-4">
-          <h2 className="font-heading text-3xl tracking-tight">Featured pieces</h2>
+          <h2 className="font-heading text-3xl tracking-tight">Collections</h2>
           <Link href="/work" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
-            View all pieces
+            View all collections
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">

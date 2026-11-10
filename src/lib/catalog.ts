@@ -19,7 +19,15 @@ export type Collection = {
   slug: string;
   title: string;
   tags: CollectionTag[];
-  items: string[];
+  items: CollectionItem[];
+};
+
+export type CollectionItem = {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  summary: string;
 };
 
 export const pieces: Piece[] = [
@@ -175,23 +183,104 @@ export const collectionTags: CollectionTag[] = ["Boos", "Hats", "Other", "Globes
 
 export const collections: Collection[] = [
   {
-    slug: "little-boo-boos",
-    title: "Little Boo Boos",
+    slug: "boos",
+    title: "Little Boos",
     tags: ["Boos", "Globes"],
-    items: ["Boos in a Bottle", "Guitar Boo", "Mushroom Boo"],
+    items: [
+      {
+        id: "boos-in-a-bottle",
+        title: "Boos in a Bottle",
+        image: "/img/cello-boo-bottle.jpg",
+        price: 48,
+        summary: "Tiny ghost in glass with a miniature instrument and moss.",
+      },
+      {
+        id: "boo-ornament",
+        title: "Boo Ornament",
+        image: "/img/guitar-boo-bottle.jpg",
+        price: 46,
+        summary: "A pocket-size boo ornament with dried flowers and soft color.",
+      },
+      {
+        id: "till-death-snowglobe-boos",
+        title: "Till Death Snowglobe Boos",
+        image: "/img/mushroom-boo-bottle.jpg",
+        price: 52,
+        summary: "Mushroom-cap boo in a globe-style scene with moss and petals.",
+      },
+    ],
   },
   {
-    slug: "whimsy-hatbox",
-    title: "Whimsy Hatbox",
+    slug: "hats",
+    title: "Hats",
     tags: ["Hats", "Other"],
-    items: ["Moonlight Boo Hat", "Witchy Ribbon Cap", "Pocket Parade Topper"],
+    items: [
+      {
+        id: "moonlight-boo-hat",
+        title: "Moonlight Boo Hat",
+        image: "/img/studio-boos-pumpkins.jpg",
+        price: 64,
+        summary: "Soft-shape hat with boo detailing and moonlight trim.",
+      },
+      {
+        id: "witchy-ribbon-cap",
+        title: "Witchy Ribbon Cap",
+        image: "/img/studio-ghost-trio.jpg",
+        price: 58,
+        summary: "Ribbon-tied cap with hand-painted whimsical marks.",
+      },
+      {
+        id: "pocket-parade-topper",
+        title: "Pocket Parade Topper",
+        image: "/img/rene-koozie-sticker.png",
+        price: 62,
+        summary: "Playful topper style with a parade of tiny stitched details.",
+      },
+    ],
+  },
+  {
+    slug: "customs-and-comissions",
+    title: "Customs and Comissions",
+    tags: ["Other"],
+    items: [
+      {
+        id: "custom-boo-portrait",
+        title: "Custom Boo Portrait",
+        image: "/img/rene-trail-sticker.png",
+        price: 180,
+        summary: "Made-to-order portrait style with your preferred palette and mood.",
+      },
+      {
+        id: "personalized-ornament",
+        title: "Personalized Ornament",
+        image: "/img/rene-alien-sticker.png",
+        price: 95,
+        summary: "Custom ornament with names, date, and character details.",
+      },
+      {
+        id: "one-off-snowglobe-scene",
+        title: "One-Off Snowglobe Scene",
+        image: "/img/rene-kiss-studio.jpg",
+        price: 240,
+        summary: "A one-of-one commission scene designed around your story.",
+      },
+    ],
   },
 ];
 
 const bySlug = new Map(pieces.map((piece) => [piece.slug, piece]));
+const collectionsBySlug = new Map(collections.map((collection) => [collection.slug, collection]));
 
 export function getPiece(slug: string): Piece | undefined {
   return bySlug.get(slug);
+}
+
+export function getCollection(slug: string): Collection | undefined {
+  return collectionsBySlug.get(slug);
+}
+
+export function getCollectionItem(collectionSlug: string, itemId: string): CollectionItem | undefined {
+  return collectionsBySlug.get(collectionSlug)?.items.find((item) => item.id === itemId);
 }
 
 export const featuredSlugs = ["threshold-no-4", "red-margin", "bowl-late"] as const;

@@ -26,8 +26,6 @@ export function HomeCarousel() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const open = openIndex !== null;
   const slide = openIndex === null ? null : gallerySlides[openIndex];
-  const openRef = useRef(open);
-  openRef.current = open;
 
   const setPaused = useCallback((next: boolean) => {
     if (pausedRef.current === next) return;
@@ -55,7 +53,7 @@ export function HomeCarousel() {
         event.clientY >= rect.top &&
         event.clientY <= rect.bottom;
       const inMiddle = event.clientX / window.innerWidth >= 0.25 && event.clientX / window.innerWidth <= 0.75;
-      setPaused(openRef.current || (overCarousel && inMiddle));
+      setPaused(open || (overCarousel && inMiddle));
     }
 
     window.addEventListener("mousemove", onMove);
@@ -84,7 +82,7 @@ export function HomeCarousel() {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(frame);
     };
-  }, [setPaused]);
+  }, [open, setPaused]);
 
   useEffect(() => {
     setPaused(open);
