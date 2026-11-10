@@ -17,7 +17,6 @@ export default function HomePage() {
             <span className="block text-green">A world of whimsy through multi-medium art</span>
             <span className="mt-2 block text-2xl text-copper sm:text-3xl">Bringing a touch of magic through everyday life</span>
           </h1>
-          <p className="mt-4 text-xs tracking-[0.18em] text-copper uppercase">Art by Rene Kiss | Denver, CO</p>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Browse the collection, open each piece for full details, and send a purchase request directly from the piece page.
           </p>
