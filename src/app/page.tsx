@@ -11,11 +11,11 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="mx-auto grid w-full max-w-6xl gap-10 px-5 pt-[5px] pb-8 md:grid-cols-[1.3fr_0.7fr] md:pb-12">
+      <section className="mx-auto grid w-full max-w-6xl gap-10 px-5 pt-3 pb-8 md:grid-cols-[1.3fr_0.7fr] md:pb-12">
         <div>
           <h1 className="max-w-xl font-heading text-4xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
             <span className="block text-green">A world of whimsy through multi-medium art</span>
-            <span className="mt-2 block text-xl text-copper sm:text-2xl">Bringing a touch of magic through everyday life</span>
+            <span className="mt-2 block text-2xl text-copper">Bringing a touch of magic through everyday life</span>
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Browse the collection, open each piece for full details, and send a purchase request directly from the piece page.
