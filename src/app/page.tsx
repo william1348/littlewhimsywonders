@@ -4,13 +4,12 @@ import { Suspense } from "react";
 import { HeroStickers } from "@/components/hero-stickers";
 import { HomeCarousel } from "@/components/home-carousel";
 import { ListForm } from "@/components/list-form";
-import { PieceCard } from "@/components/piece-card";
 import { buttonVariants } from "@/components/ui/button";
-import { featuredPieces } from "@/lib/catalog";
+import { collections } from "@/lib/catalog";
 import { cn } from "cn";
 
 export default function HomePage() {
-  const featured = featuredPieces();
+  const homeCollections = collections;
 
   return (
     <main>
@@ -49,8 +48,22 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((piece) => (
-            <PieceCard key={piece.slug} piece={piece} />
+          {homeCollections.map((collection) => (
+            <article key={collection.slug} className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
+              <p className="text-xs tracking-[0.16em] text-muted-foreground uppercase">{collection.tags.join(" · ")}</p>
+              <h3 className="mt-2 font-heading text-3xl tracking-tight">{collection.title}</h3>
+              <ul className="mt-4 list-disc space-y-1 pl-5 text-sm">
+                {collection.items.slice(0, 3).map((item) => (
+                  <li key={item.id}>{item.title}</li>
+                ))}
+              </ul>
+              <Link
+                href={`/collections/${collection.slug}`}
+                className="mt-4 inline-block text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+              >
+                Open collection
+              </Link>
+            </article>
           ))}
         </div>
       </section>
