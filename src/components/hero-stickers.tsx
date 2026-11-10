@@ -8,7 +8,7 @@ const portraits = [
   {
     src: "/img/rene-alien-sticker.png",
     alt: "Rene Kiss holding a handmade green alien",
-    bubble: "Holy Moly",
+    bubble: "Holy Moly!",
   },
   {
     src: "/img/rene-koozie-sticker.png",
@@ -49,10 +49,15 @@ export function HeroStickers() {
             <img
               src={portrait.src}
               alt={visible ? portrait.alt : ""}
-              className="h-full w-full object-contain object-bottom drop-shadow-[0_16px_24px_rgba(34,10,4,0.4)]"
+              className={cn(
+                "object-contain object-bottom drop-shadow-[0_16px_24px_rgba(34,10,4,0.4)]",
+                portrait.bubble
+                  ? "absolute right-0 bottom-0 h-[82%] w-[82%]"
+                  : "h-full w-full",
+              )}
             />
             {portrait.bubble ? (
-              <div className="pointer-events-none absolute top-[2%] left-[-4%] w-[62%] max-w-[11.5rem] -rotate-6 md:top-[4%] md:left-[-8%] md:max-w-[13rem]">
+              <div className="pointer-events-none absolute top-0 left-0 w-[6.75rem] -rotate-6 md:-left-3 md:w-[7.5rem]">
                 <svg
                   viewBox="0 0 240 150"
                   className="h-auto w-full overflow-visible"
@@ -106,7 +111,7 @@ export function HeroStickers() {
                     strokeLinecap="round"
                   />
                 </svg>
-                <p className="absolute inset-0 flex items-center justify-center pb-3 font-heading text-[1.35rem] leading-none font-bold tracking-tight text-burgundy md:text-[1.55rem]">
+                <p className="absolute inset-0 flex items-center justify-center pb-2.5 font-heading text-[0.95rem] leading-none font-bold tracking-tight text-burgundy md:text-[1.05rem]">
                   {portrait.bubble}
                 </p>
               </div>
