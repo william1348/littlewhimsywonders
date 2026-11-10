@@ -11,9 +11,9 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-8 md:grid-cols-[1.3fr_0.7fr] md:py-12">
+      <section className="mx-auto grid w-full max-w-6xl gap-10 px-5 pt-[5px] pb-8 md:grid-cols-[1.3fr_0.7fr] md:pb-12">
         <div>
-          <h1 className="max-w-xl font-heading text-3xl font-normal leading-[1.1] tracking-tight sm:text-4xl">
+          <h1 className="max-w-xl font-heading text-4xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
             <span className="block text-green">A world of whimsy through multi-medium art</span>
             <span className="mt-2 block text-2xl text-copper sm:text-3xl">Bringing a touch of magic through everyday life</span>
           </h1>
