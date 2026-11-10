@@ -113,7 +113,7 @@ export function HomeCarousel() {
             <button
               key={`${item.src}-${index}`}
               type="button"
-              className="group/slide relative h-full shrink-0 cursor-zoom-in overflow-hidden"
+              className="group/slide relative h-full shrink-0 cursor-pointer overflow-hidden"
               onClick={() => setOpenIndex(index % gallerySlides.length)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
