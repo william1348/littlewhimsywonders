@@ -14,7 +14,13 @@ const portraits = [
     src: "/img/rene-koozie-sticker.png",
     alt: "Rene Kiss holding raccoon koozies",
   },
+  {
+    src: "/img/rene-trail-sticker.png",
+    alt: "Rene Kiss on a trail with binoculars",
+  },
 ];
+
+const positions = ["left-0", "left-[6%]", "right-0"] as const;
 
 export function HeroStickers() {
   const [active, setActive] = useState(0);
@@ -40,7 +46,7 @@ export function HeroStickers() {
             key={portrait.src}
             className={cn(
               "absolute top-0 h-full w-[90%] transition-opacity duration-1000 ease-in-out",
-              index === 0 ? "left-0" : "right-0",
+              positions[index],
               visible ? "opacity-100" : "opacity-0",
             )}
             aria-hidden={!visible}
