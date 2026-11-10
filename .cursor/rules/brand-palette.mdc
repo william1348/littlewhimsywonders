@@ -1,0 +1,20 @@
+---
+description: Brand palette names and hex values for Little Whimsy Wonders
+alwaysApply: true
+---
+
+# Brand palette
+
+When the user names a color, use this mapping. Do not invent extra oranges.
+
+| They say | Token | Hex | Role |
+|---|---|---|---|
+| white, beige, beig, page | `page` | `#F6E6D0` | Page background |
+| light brown, kraft | `kraft` | `#DFB88D` | Surfaces, cards |
+| burgundy, burgandy, ink | `burgundy` | `#522028` | Type, primary buttons |
+| copper | `copper` | `#962E17` | Warm accent, labels, errors |
+| green, sage | `green` | `#5C6B4A` | Cool accent, muted text |
+| gold | `gold` | `#EAB46F` | Highlight only, never on kraft |
+| black, linework | `linework` | `#220A04` | Strokes, strongest marks |
+
+Use the Tailwind tokens `bg-page`, `bg-kraft`, `text-burgundy`, `text-copper`, `text-green`, `bg-gold`, `text-linework`. Keep gold off kraft; it disappears.

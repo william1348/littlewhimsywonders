@@ -54,7 +54,7 @@ export function ListForm() {
       </div>
       <p className="text-sm text-muted-foreground">One note when a new edition is pulled. No weekly letter.</p>
       {message ? (
-        <p role={status === "error" ? "alert" : "status"} className={status === "error" ? "text-sm text-oxide" : "text-sm"}>
+        <p role={status === "error" ? "alert" : "status"} className={status === "error" ? "text-sm text-copper" : "text-sm"}>
           {message}
         </p>
       ) : null}

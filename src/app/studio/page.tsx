@@ -11,7 +11,7 @@ export default function StudioPage() {
   return (
     <main className="mx-auto grid w-full max-w-6xl gap-12 px-5 py-12 md:grid-cols-[1.1fr_0.9fr] md:py-16">
       <article className="max-w-xl">
-        <p className="text-xs tracking-[0.18em] text-oxide uppercase">The studio</p>
+        <p className="text-xs tracking-[0.18em] text-copper uppercase">The studio</p>
         <h1 className="mt-3 font-heading text-5xl tracking-tight">One room, north light.</h1>
         <div className="mt-6 flex flex-col gap-4 leading-relaxed text-muted-foreground">
           <p>

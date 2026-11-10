@@ -45,12 +45,17 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
 
   return (
     <main className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.1fr_0.9fr] md:py-16">
-      <div className="bg-[#f6f1e7] ring-1 ring-foreground/10">
-        <PrintArt piece={piece} />
+      <div className="overflow-hidden bg-kraft ring-1 ring-foreground/10">
+        {piece.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={piece.image} alt={piece.title} className="h-auto w-full object-cover" />
+        ) : (
+          <PrintArt piece={piece} />
+        )}
       </div>
       <div className="flex flex-col gap-6">
         <div>
-          <p className="text-xs tracking-[0.18em] text-oxide uppercase">
+          <p className="text-xs tracking-[0.18em] text-copper uppercase">
             {piece.kind === "original" ? "Original" : "Print"} · {piece.year}
           </p>
           <h1 className="mt-3 font-heading text-5xl tracking-tight">{piece.title}</h1>

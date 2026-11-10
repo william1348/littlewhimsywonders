@@ -17,11 +17,19 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-border">
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-end justify-between gap-4 px-5 py-5">
-        <Link href="/" className="group">
-          <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
-          <span className="mt-1 block text-xs tracking-[0.18em] text-muted-foreground uppercase">Art gallery</span>
+    <header className="border-b border-border bg-background">
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
+        <Link href="/" className="group flex items-center gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/img/ghost-mushroom.png"
+            alt=""
+            className="h-16 w-auto [filter:brightness(1.14)_drop-shadow(0_0_0.7px_rgba(34,10,4,0.45))_drop-shadow(0_1px_2px_rgba(82,32,40,0.22))]"
+          />
+          <span>
+            <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
+            <span className="mt-2 block text-xs tracking-[0.18em] text-copper uppercase">Rene Kiss | Handmade in Colorado</span>
+          </span>
         </Link>
         <nav aria-label="Studio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
           {links.map((link) => {
@@ -33,7 +41,7 @@ export function SiteHeader() {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "text-sm underline-offset-4 hover:underline",
-                  active ? "text-foreground underline decoration-oxide decoration-2" : "text-muted-foreground",
+                  active ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
                 )}
               >
                 {link.label}

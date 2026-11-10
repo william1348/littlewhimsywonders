@@ -12,6 +12,7 @@ export type Piece = {
   year: number;
   summary: string;
   description: string;
+  image?: string;
 };
 
 export type Collection = {
@@ -22,6 +23,48 @@ export type Collection = {
 };
 
 export const pieces: Piece[] = [
+  {
+    slug: "boos-in-a-bottle",
+    title: "Boos in a Bottle",
+    kind: "original",
+    price: 48,
+    edition: "Unique",
+    size: "3 in bottle",
+    paper: "Clay, moss, and cork in glass",
+    year: 2026,
+    summary: "A tiny ghost and a cello, corked in for the winter.",
+    description:
+      "Handmade clay boo with a miniature cello, moss, and dried petals inside a corked bottle.",
+    image: "/img/cello-boo-bottle.jpg",
+  },
+  {
+    slug: "guitar-boo-bottle",
+    title: "Guitar Boo",
+    kind: "original",
+    price: 48,
+    edition: "Unique",
+    size: "3 in bottle",
+    paper: "Clay, moss, and cork in glass",
+    year: 2026,
+    summary: "A quiet boo and a guitar, standing in the tulips.",
+    description:
+      "Handmade clay boo with a miniature guitar, moss, and dried petals inside a corked bottle.",
+    image: "/img/guitar-boo-bottle.jpg",
+  },
+  {
+    slug: "mushroom-boo",
+    title: "Mushroom Boo",
+    kind: "original",
+    price: 42,
+    edition: "Unique",
+    size: "3 in bottle",
+    paper: "Clay, moss, and cork in glass",
+    year: 2026,
+    summary: "A boo under a purple cap, among the flowers.",
+    description:
+      "Handmade clay mushroom boo with moss and petals inside a corked bottle.",
+    image: "/img/mushroom-boo-bottle.jpg",
+  },
   {
     slug: "threshold-no-4",
     title: "Threshold No. 4",
@@ -135,7 +178,7 @@ export const collections: Collection[] = [
     slug: "little-boo-boos",
     title: "Little Boo Boos",
     tags: ["Boos", "Globes"],
-    items: ["Boos in a Bottle", "Boo Ornament", "Till Death Snowglobe Boos"],
+    items: ["Boos in a Bottle", "Guitar Boo", "Mushroom Boo"],
   },
   {
     slug: "whimsy-hatbox",

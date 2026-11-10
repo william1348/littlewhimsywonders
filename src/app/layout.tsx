@@ -15,6 +15,7 @@ const outfit = Outfit({
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s · Little Whimsy Wonders",
   },
   description:
-    "Browse art pieces from a one-person studio, open detailed piece pages, send purchase requests, and join the mailing list.",
+    "A world of whimsy through multi-medium art. Bringing a touch of magic into everyday life. Browse the collection, send a purchase request, and join the list.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
