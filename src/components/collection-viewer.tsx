@@ -62,7 +62,7 @@ export function CollectionViewer({ collection }: { collection: Collection }) {
             href="/studio"
             className={cn(buttonVariants({ size: "lg" }), "h-11 rounded-lg bg-green px-4 font-light text-white hover:bg-green/90")}
           >
-            Order Custom / Comission
+            Order Custom / Commission
           </Link>
         </div>
       </div>

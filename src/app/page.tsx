@@ -33,7 +33,7 @@ export default function HomePage() {
                   <path d="M13.5 9 16 11.5" stroke="currentColor" strokeWidth="1.8" />
                   <path d="M3.5 4.5h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                 </svg>
-                Comission an art piece
+                Commission an art piece
               </span>
             </Link>
           </div>

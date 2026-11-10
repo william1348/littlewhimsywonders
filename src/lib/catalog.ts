@@ -185,7 +185,7 @@ export const collectionTags: CollectionTag[] = ["Boos", "Hats", "Other", "Globes
 export const collections: Collection[] = [
   {
     slug: "boos",
-    title: "Little Boos",
+    title: "Lil' Boos",
     description:
       "Tiny ghost scenes in bottles, ornaments, and snowglobes with moss, petals, and cozy storybook details.",
     tags: ["Boos", "Globes"],
@@ -215,7 +215,7 @@ export const collections: Collection[] = [
   },
   {
     slug: "hats",
-    title: "Hats",
+    title: "Petal Hats",
     description:
       "Whimsical wearable hats and toppers with hand-painted details, ribbons, and playful boo-inspired accents.",
     tags: ["Hats", "Other"],
@@ -244,8 +244,8 @@ export const collections: Collection[] = [
     ],
   },
   {
-    slug: "customs-and-comissions",
-    title: "Customs & Comissions",
+    slug: "customs-and-commissions",
+    title: "Customs & Commissions",
     description:
       "One-of-one made-to-order art designed around your ideas, colors, and memories, from ornaments to full scene pieces.",
     tags: ["Other"],

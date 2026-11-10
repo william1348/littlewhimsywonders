@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { CollectionViewer } from "@/components/collection-viewer";
 import { collections, getCollection } from "@/lib/catalog";
@@ -25,6 +25,9 @@ export async function generateMetadata({
 
 export default async function CollectionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  if (slug === "customs-and-comissions") {
+    redirect("/collections/customs-and-commissions");
+  }
   const collection = getCollection(slug);
   if (!collection) notFound();
 
