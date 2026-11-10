@@ -32,14 +32,7 @@ export default function HomePage() {
           </div>
         </div>
         <aside className="border-t border-border pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8">
-          <div className="relative h-72 overflow-hidden rounded-2xl ring-1 ring-foreground/10 md:h-full">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/img/rene-kiss-studio.jpg"
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-page/20" />
+          <div className="relative h-72 md:h-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/img/rene-alien-sticker.png"
