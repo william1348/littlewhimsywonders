@@ -18,10 +18,9 @@ export function SiteHeader() {
 
   return (
     <header className="border-b border-border">
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-end justify-between gap-4 px-5 py-5">
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
         <Link href="/" className="group">
           <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
-          <span className="mt-1 block text-xs font-semibold tracking-[0.18em] text-green uppercase">A world of whimsy</span>
         </Link>
         <nav aria-label="Studio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
           {links.map((link) => {

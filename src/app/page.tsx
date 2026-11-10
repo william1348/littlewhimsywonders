@@ -11,11 +11,11 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.3fr_0.7fr] md:py-24">
+      <section className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-8 md:grid-cols-[1.3fr_0.7fr] md:py-12">
         <div>
-          <h1 className="max-w-xl font-heading text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-            <span className="block font-semibold text-green">A world of whimsy through multi-medium art</span>
-            <span className="mt-3 block text-4xl text-copper sm:text-5xl">Bringing a touch of magic through everyday life</span>
+          <h1 className="max-w-xl font-heading text-3xl font-normal leading-[1.1] tracking-tight sm:text-4xl">
+            <span className="block text-green">A world of whimsy through multi-medium art</span>
+            <span className="mt-2 block text-2xl text-copper sm:text-3xl">Bringing a touch of magic through everyday life</span>
           </h1>
           <p className="mt-4 text-xs tracking-[0.18em] text-copper uppercase">Art by Rene Kiss | Denver, CO</p>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
