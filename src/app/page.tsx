@@ -49,29 +49,24 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {homeCollections.map((collection) => (
-            <article key={collection.slug} className="rounded-xl bg-card p-5 ring-1 ring-foreground/10 shadow-[0_8px_20px_rgba(34,10,4,0.08)]">
-              <Link
-                href={`/collections/${collection.slug}`}
-                className="mb-4 block overflow-hidden rounded-lg ring-1 ring-foreground/10"
-              >
+            <Link
+              key={collection.slug}
+              href={`/collections/${collection.slug}`}
+              className="group block rounded-xl bg-card p-5 ring-1 ring-foreground/10 shadow-[0_8px_20px_rgba(34,10,4,0.08)] transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              <div className="mb-4 overflow-hidden rounded-lg ring-1 ring-foreground/10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={collection.items[0]?.image}
                   alt={collection.items[0]?.title ?? collection.title}
-                  className="h-72 w-full object-cover transition-transform duration-300 hover:scale-[1.02] sm:h-80"
+                  className="h-72 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] sm:h-80"
                 />
-              </Link>
+              </div>
               <h3 className="font-heading text-3xl tracking-tight">{collection.title}</h3>
               <p className="mt-3 rounded-md bg-background/95 px-3 py-2 text-sm leading-6 text-green ring-1 ring-foreground/8">
                 {collection.description}
               </p>
-              <Link
-                href={`/collections/${collection.slug}`}
-                className="mt-4 inline-block text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-              >
-                Open collection
-              </Link>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
