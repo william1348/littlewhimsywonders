@@ -36,7 +36,7 @@ export default function HomePage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/img/rene-kiss-studio.jpg"
-              alt="Rene Kiss at work, handmade in Colorado"
+              alt="Rene Kiss, handmade in Colorado"
               className="absolute inset-0 h-full w-full rounded-2xl object-cover ring-1 ring-foreground/10"
             />
           </div>
