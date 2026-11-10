@@ -137,3 +137,42 @@
     @apply font-sans;
   }
 }
+
+@keyframes float-mushroom {
+  0% {
+    transform: translate(6vw, 18vh) rotate(-10deg);
+  }
+  20% {
+    transform: translate(62vw, 10vh) rotate(8deg);
+  }
+  40% {
+    transform: translate(74vw, 48vh) rotate(-4deg);
+  }
+  60% {
+    transform: translate(28vw, 72vh) rotate(12deg);
+  }
+  80% {
+    transform: translate(8vw, 44vh) rotate(-6deg);
+  }
+  100% {
+    transform: translate(6vw, 18vh) rotate(-10deg);
+  }
+}
+
+.floating-mushroom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(260px, 38vw);
+  height: auto;
+  opacity: 0.42;
+  animation: float-mushroom 64s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-mushroom {
+    animation: none;
+    transform: translate(70vw, 58vh) rotate(-6deg);
+    opacity: 0.28;
+  }
+}

@@ -17,7 +17,7 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-border">
+    <header className="border-b border-border bg-background">
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-end justify-between gap-4 px-5 py-5">
         <Link href="/" className="group">
           <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
