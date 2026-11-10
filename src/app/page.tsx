@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
+import { HeroStickers } from "@/components/hero-stickers";
 import { HomeCarousel } from "@/components/home-carousel";
 import { ListForm } from "@/components/list-form";
 import { PieceCard } from "@/components/piece-card";
@@ -32,14 +33,7 @@ export default function HomePage() {
           </div>
         </div>
         <aside className="border-t border-border pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8">
-          <div className="relative h-72 md:h-full">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/img/rene-alien-sticker.png"
-              alt="Rene Kiss holding a handmade green alien"
-              className="absolute inset-0 h-full w-full object-contain object-bottom drop-shadow-[0_16px_24px_rgba(34,10,4,0.4)]"
-            />
-          </div>
+          <HeroStickers />
         </aside>
       </section>
 
