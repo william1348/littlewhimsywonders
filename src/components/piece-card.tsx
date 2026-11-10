@@ -9,9 +9,14 @@ export function PieceCard({ piece }: { piece: Piece }) {
     <article className="flex flex-col gap-3">
       <Link
         href={`/work/${piece.slug}`}
-        className="block bg-kraft ring-1 ring-foreground/10 transition-transform duration-200 hover:-translate-y-0.5"
+        className="block overflow-hidden bg-kraft ring-1 ring-foreground/10 transition-transform duration-200 hover:-translate-y-0.5"
       >
-        <PrintArt piece={piece} />
+        {piece.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={piece.image} alt="" className="aspect-[4/5] w-full object-cover" />
+        ) : (
+          <PrintArt piece={piece} />
+        )}
       </Link>
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="font-heading text-2xl leading-none tracking-tight">

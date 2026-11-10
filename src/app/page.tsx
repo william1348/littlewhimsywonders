@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Suspense } from "react";
 
+import { HomeCarousel } from "@/components/home-carousel";
 import { ListForm } from "@/components/list-form";
 import { PieceCard } from "@/components/piece-card";
 import { buttonVariants } from "@/components/ui/button";
@@ -36,7 +38,11 @@ export default function HomePage() {
         </aside>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-5 pb-20">
+      <Suspense fallback={<div className="h-[320px] w-full bg-kraft/60" />}>
+        <HomeCarousel />
+      </Suspense>
+
+      <section className="mx-auto w-full max-w-6xl px-5 pt-16 pb-20">
         <div className="mb-8 flex items-end justify-between gap-4">
           <h2 className="font-heading text-3xl tracking-tight">Featured pieces</h2>
           <Link href="/work" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
