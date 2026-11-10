@@ -18,6 +18,7 @@ export type Piece = {
 export type Collection = {
   slug: string;
   title: string;
+  description: string;
   tags: CollectionTag[];
   items: CollectionItem[];
 };
@@ -185,6 +186,8 @@ export const collections: Collection[] = [
   {
     slug: "boos",
     title: "Little Boos",
+    description:
+      "Tiny ghost scenes in bottles, ornaments, and snowglobes with moss, petals, and cozy storybook details.",
     tags: ["Boos", "Globes"],
     items: [
       {
@@ -213,6 +216,8 @@ export const collections: Collection[] = [
   {
     slug: "hats",
     title: "Hats",
+    description:
+      "Whimsical wearable hats and toppers with hand-painted details, ribbons, and playful boo-inspired accents.",
     tags: ["Hats", "Other"],
     items: [
       {
@@ -241,6 +246,8 @@ export const collections: Collection[] = [
   {
     slug: "customs-and-comissions",
     title: "Customs and Comissions",
+    description:
+      "One-of-one made-to-order art designed around your ideas, colors, and memories, from ornaments to full scene pieces.",
     tags: ["Other"],
     items: [
       {

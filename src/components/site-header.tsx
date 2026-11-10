@@ -30,7 +30,7 @@ export function SiteHeader() {
             href="/about"
             aria-current={pathname === "/about" ? "page" : undefined}
             className={cn(
-              "text-sm underline-offset-4 hover:underline",
+              "text-base underline-offset-4 hover:underline",
               pathname === "/about" ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
             )}
           >
@@ -43,7 +43,7 @@ export function SiteHeader() {
             className="text-muted-foreground transition-colors hover:text-foreground"
             aria-label="Instagram"
           >
-            <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+            <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" aria-hidden="true">
               <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.8" />
               <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
               <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" />
