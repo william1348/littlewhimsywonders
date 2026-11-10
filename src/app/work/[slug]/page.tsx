@@ -89,7 +89,7 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
         <div id="purchase-form" className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
           <h2 className="font-heading text-2xl tracking-tight">Purchase this piece</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Send your details and we will reply with delivery timing and payment instructions.
+            Use this form for questions, shipping details, or to reserve a piece if you do not want to pay by card yet.
           </p>
           <div className="mt-4">
             <HoldForm
@@ -99,7 +99,7 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
               notePlaceholder="Share delivery city, timing, or pickup preference."
               submitLabel="Send purchase request"
               savingLabel="Sending request…"
-              helperText="Checkout does not happen on this page. Little Whimsy Wonders replies to confirm availability, shipping cost, and payment."
+              helperText="You can pay now with card above, or send this request and get a manual follow-up from the studio."
             />
           </div>
         </div>

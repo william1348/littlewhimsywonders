@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 
+import { defaultStage } from "@/lib/access";
 import { allowRequest, json, readBody, sameOrigin } from "@/lib/http";
 import { getCollectionItem, getPiece } from "@/lib/catalog";
 import { isRecord } from "@/lib/validators";
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      customer_creation: "always",
       line_items: [
         {
           quantity: 1,
@@ -55,6 +57,13 @@ export async function POST(request: Request) {
           },
         },
       ],
+      metadata: {
+        stage: defaultStage(),
+        itemTitle: title,
+        pieceSlug: piece?.slug ?? "",
+        collectionSlug,
+        itemId,
+      },
       success_url: `${baseUrl}${returnPath}?checkout=success`,
       cancel_url: `${baseUrl}${returnPath}?checkout=cancelled`,
     });

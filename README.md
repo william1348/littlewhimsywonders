@@ -1,8 +1,8 @@
 # Little Whimsy Wonders
 
-A one-person print studio site. Browse the work, request a hold, and leave an email for the next edition. Hold requests and mailing-list addresses are stored for the studio.
+A one-person print studio site. Browse the work, request a hold, leave an email for the next edition, or pay by card with Stripe Checkout.
 
-Nothing on the site charges a card. A hold saves a name, an email, a note, and the pieces. Payment is arranged in the reply.
+Card checkout sessions and studio messages are stored for the studio.
 
 ## Run it
 
@@ -23,3 +23,20 @@ Publishing the app can attach its own Postgres database. Do not commit `DATABASE
 The desk lists what was saved. On a team copy, only an admin can open it. On a private copy, the signed-in viewer can open it.
 
 Preview traffic is stored separately from production traffic, so a preview does not mix into the live list.
+
+## Stripe checkout setup
+
+Set these environment variables before using card checkout:
+
+- `STRIPE_SECRET_KEY` (required for `/api/checkout`)
+- `STRIPE_WEBHOOK_SECRET` (required for `/api/stripe/webhook` to persist paid/failed checkout status)
+
+Then configure a Stripe webhook endpoint to:
+
+- `POST https://<your-domain>/api/stripe/webhook`
+
+Enable these events in Stripe:
+
+- `checkout.session.completed`
+- `checkout.session.async_payment_succeeded`
+- `checkout.session.async_payment_failed`

@@ -27,9 +27,25 @@ export type Inquiry = {
   createdAt: string;
 };
 
+export type OrderStatus = "paid" | "unpaid" | "failed";
+
+export type Order = {
+  id: string;
+  sessionId: string;
+  title: string;
+  customerEmail: string;
+  amountTotal: number;
+  currency: string;
+  status: OrderStatus;
+  source: string;
+  stage: Stage;
+  createdAt: string;
+};
+
 type FileDb = {
   subscribers: Subscriber[];
   inquiries: Inquiry[];
+  orders: Order[];
 };
 
 const MAX_ROWS = 5000;
@@ -58,6 +74,20 @@ CREATE INDEX IF NOT EXISTS subscribers_stage_created_idx
   ON subscribers (stage, created_at DESC);
 CREATE INDEX IF NOT EXISTS inquiries_stage_created_idx
   ON inquiries (stage, created_at DESC);
+CREATE TABLE IF NOT EXISTS orders (
+  id BIGSERIAL PRIMARY KEY,
+  session_id TEXT NOT NULL UNIQUE,
+  title TEXT NOT NULL,
+  customer_email TEXT NOT NULL DEFAULT '',
+  amount_total INTEGER NOT NULL CHECK (amount_total >= 0),
+  currency TEXT NOT NULL DEFAULT 'usd',
+  status TEXT NOT NULL CHECK (status IN ('paid', 'unpaid', 'failed')),
+  source TEXT NOT NULL,
+  stage TEXT NOT NULL CHECK (stage IN ('production', 'preview')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS orders_stage_created_idx
+  ON orders (stage, created_at DESC);
 `;
 
 const globalForPg = globalThis as unknown as {
@@ -121,11 +151,42 @@ export async function addInquiry(input: {
   );
 }
 
+export async function addOrder(input: {
+  sessionId: string;
+  title: string;
+  customerEmail: string;
+  amountTotal: number;
+  currency: string;
+  status: OrderStatus;
+  source: string;
+  stage: Stage;
+}): Promise<void> {
+  const db = await database();
+  if (!db) {
+    await addOrderFile(input);
+    return;
+  }
+  await db.query(
+    `INSERT INTO orders (session_id, title, customer_email, amount_total, currency, status, source, stage)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+     ON CONFLICT (session_id) DO UPDATE SET
+       title = EXCLUDED.title,
+       customer_email = EXCLUDED.customer_email,
+       amount_total = EXCLUDED.amount_total,
+       currency = EXCLUDED.currency,
+       status = EXCLUDED.status,
+       source = EXCLUDED.source,
+       stage = EXCLUDED.stage`,
+    [input.sessionId, input.title, input.customerEmail, Math.max(0, Math.round(input.amountTotal)), input.currency, input.status, input.source, input.stage],
+  );
+}
+
 export async function listDesk(stage: Stage): Promise<{
   storage: StorageMode;
   stage: Stage;
   subscribers: Subscriber[];
   inquiries: Inquiry[];
+  orders: Order[];
 }> {
   const db = await database();
   if (!db) return listFile(stage);
@@ -159,6 +220,25 @@ export async function listDesk(stage: Stage): Promise<{
      LIMIT $2`,
     [stage, LIST_LIMIT],
   );
+  const orders = await db.query<{
+    id: string | number;
+    session_id: string;
+    title: string;
+    customer_email: string;
+    amount_total: number | string;
+    currency: string;
+    status: OrderStatus;
+    source: string;
+    stage: Stage;
+    created_at: Date | string;
+  }>(
+    `SELECT id, session_id, title, customer_email, amount_total, currency, status, source, stage, created_at
+     FROM orders
+     WHERE stage = $1
+     ORDER BY created_at DESC
+     LIMIT $2`,
+    [stage, LIST_LIMIT],
+  );
   return {
     storage: "database",
     stage,
@@ -175,6 +255,18 @@ export async function listDesk(stage: Stage): Promise<{
       email: row.email,
       message: row.message,
       pieces: parsePieces(row.pieces),
+      stage: row.stage,
+      createdAt: toIso(row.created_at),
+    })),
+    orders: orders.rows.map((row) => ({
+      id: String(row.id),
+      sessionId: row.session_id,
+      title: row.title,
+      customerEmail: row.customer_email,
+      amountTotal: Number(row.amount_total),
+      currency: row.currency,
+      status: row.status,
+      source: row.source,
       stage: row.stage,
       createdAt: toIso(row.created_at),
     })),
@@ -240,9 +332,13 @@ async function readFileDb(): Promise<FileDb> {
     const raw = await readFile(filePath, "utf8");
     const parsed: unknown = JSON.parse(raw);
     if (!isFileDb(parsed)) throw new StoreError("unavailable");
-    return parsed;
+    return {
+      subscribers: parsed.subscribers,
+      inquiries: parsed.inquiries,
+      orders: Array.isArray(parsed.orders) ? parsed.orders : [],
+    };
   } catch (error) {
-    if (isMissing(error)) return { subscribers: [], inquiries: [] };
+    if (isMissing(error)) return { subscribers: [], inquiries: [], orders: [] };
     if (error instanceof StoreError) throw error;
     throw new StoreError("unavailable");
   }
@@ -292,6 +388,39 @@ async function addInquiryFile(input: {
   });
 }
 
+async function addOrderFile(input: {
+  sessionId: string;
+  title: string;
+  customerEmail: string;
+  amountTotal: number;
+  currency: string;
+  status: OrderStatus;
+  source: string;
+  stage: Stage;
+}): Promise<void> {
+  await withFile(async (data) => {
+    const index = data.orders.findIndex((row) => row.sessionId === input.sessionId);
+    const next: Order = {
+      id: index >= 0 ? data.orders[index].id : crypto.randomUUID(),
+      sessionId: input.sessionId,
+      title: input.title,
+      customerEmail: input.customerEmail,
+      amountTotal: Math.max(0, Math.round(input.amountTotal)),
+      currency: input.currency,
+      status: input.status,
+      source: input.source,
+      stage: input.stage,
+      createdAt: index >= 0 ? data.orders[index].createdAt : new Date().toISOString(),
+    };
+    if (index >= 0) {
+      data.orders[index] = next;
+    } else {
+      data.orders.push(next);
+    }
+    await writeFileDb(data);
+  });
+}
+
 async function listFile(stage: Stage) {
   return withFile((data) => ({
     storage: "local-file" as const,
@@ -304,13 +433,18 @@ async function listFile(stage: Stage) {
       .filter((row) => row.stage === stage)
       .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
       .slice(0, LIST_LIMIT),
+    orders: data.orders
+      .filter((row) => row.stage === stage)
+      .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+      .slice(0, LIST_LIMIT),
   }));
 }
 
 function isFileDb(value: unknown): value is FileDb {
   if (typeof value !== "object" || value === null) return false;
-  const record = value as { subscribers?: unknown; inquiries?: unknown };
-  return Array.isArray(record.subscribers) && Array.isArray(record.inquiries);
+  const record = value as { subscribers?: unknown; inquiries?: unknown; orders?: unknown };
+  if (!Array.isArray(record.subscribers) || !Array.isArray(record.inquiries)) return false;
+  return record.orders === undefined || Array.isArray(record.orders);
 }
 
 function isMissing(error: unknown): boolean {
