@@ -35,7 +35,7 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <aside className="border-t border-border pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8">
+        <aside className="hidden border-t border-border pt-6 md:block md:border-t-0 md:border-l md:pt-0 md:pl-8">
           <HeroStickers />
         </aside>
       </section>
