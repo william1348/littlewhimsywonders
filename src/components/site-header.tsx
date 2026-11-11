@@ -15,7 +15,7 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "bg-background transition-shadow duration-350 ease-out",
+        "sticky top-0 z-50 mb-5 bg-background transition-shadow duration-350 ease-out",
         menuOpen ? "shadow-[0_10px_24px_rgba(34,10,4,0.13)]" : "shadow-[0_4px_14px_rgba(34,10,4,0.08)]",
       )}
     >
