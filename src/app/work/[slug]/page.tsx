@@ -4,6 +4,8 @@ import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
 import { BagButton } from "@/components/bag";
+import { CheckoutButton } from "@/components/checkout-button";
+import { CheckoutStatusFromQuery } from "@/components/checkout-status-from-query";
 import { HoldForm } from "@/components/hold-form";
 import { PrintArt } from "@/components/print-art";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +29,11 @@ export async function generateMetadata({
   return { title: piece.title, description: piece.summary };
 }
 
-export default function PiecePage({ params }: { params: Promise<{ slug: string }> }) {
+export default function PiecePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   return (
     <Suspense fallback={<main className="mx-auto w-full max-w-6xl px-5 py-16 text-muted-foreground">Opening the piece…</main>}>
       <PieceBody params={params} />
@@ -62,6 +68,9 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
           <p className="mt-4 text-lg text-muted-foreground">{piece.summary}</p>
         </div>
         <p className="font-heading text-3xl tabular-nums">{formatPrice(piece.price)}</p>
+        <Suspense fallback={null}>
+          <CheckoutStatusFromQuery />
+        </Suspense>
         <dl className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-muted-foreground">Edition</dt>
@@ -78,6 +87,7 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
         </dl>
         <p className="leading-relaxed">{piece.description}</p>
         <div className="flex flex-wrap items-center gap-3">
+          <CheckoutButton pieceSlug={piece.slug} label="Buy with card" className="h-11 rounded-lg px-4" />
           <a href="#purchase-form" className={cn(buttonVariants({ size: "lg" }), "h-11 rounded-lg px-4")}>
             Purchase this piece
           </a>
@@ -87,7 +97,7 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
         <div id="purchase-form" className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
           <h2 className="font-heading text-2xl tracking-tight">Purchase this piece</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Send your details and we will reply with delivery timing and payment instructions.
+            Use this form for questions, shipping details, or to reserve a piece if you do not want to pay by card yet.
           </p>
           <div className="mt-4">
             <HoldForm
@@ -97,7 +107,7 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
               notePlaceholder="Share delivery city, timing, or pickup preference."
               submitLabel="Send purchase request"
               savingLabel="Sending request…"
-              helperText="Checkout does not happen on this page. Little Whimsy Wonders replies to confirm availability, shipping cost, and payment."
+              helperText="You can pay now with card above, or send this request and get a manual follow-up from the studio."
             />
           </div>
         </div>

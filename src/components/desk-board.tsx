@@ -22,10 +22,22 @@ type Inquiry = {
   createdAt: string;
 };
 
+type Order = {
+  id: string;
+  title: string;
+  customerEmail: string;
+  amountTotal: number;
+  currency: string;
+  status: "paid" | "unpaid" | "failed";
+  source: string;
+  createdAt: string;
+};
+
 type DeskData = {
   storage: "database" | "local-file";
   subscribers: Subscriber[];
   inquiries: Inquiry[];
+  orders: Order[];
 };
 
 export function DeskBoard() {
@@ -45,7 +57,7 @@ export function DeskBoard() {
         setLoading(false);
         return;
       }
-      if (!body || !Array.isArray(body.subscribers) || !Array.isArray(body.inquiries)) {
+      if (!body || !Array.isArray(body.subscribers) || !Array.isArray(body.inquiries) || !Array.isArray(body.orders)) {
         setError("The desk sent an unexpected reply.");
         setLoading(false);
         return;
@@ -123,6 +135,38 @@ export function DeskBoard() {
           </section>
 
           <section className="flex flex-col gap-4">
+            <h2 className="font-heading text-3xl tracking-tight">Card checkouts</h2>
+            {data.orders.length === 0 ? (
+              <p className="text-muted-foreground">No card checkouts yet.</p>
+            ) : (
+              <div className="overflow-x-auto rounded-lg ring-1 ring-foreground/10">
+                <table className="w-full min-w-[42rem] text-left text-sm">
+                  <thead className="bg-secondary text-muted-foreground">
+                    <tr>
+                      <th className="px-4 py-3 font-medium">Item</th>
+                      <th className="px-4 py-3 font-medium">Email</th>
+                      <th className="px-4 py-3 font-medium">Amount</th>
+                      <th className="px-4 py-3 font-medium">Status</th>
+                      <th className="px-4 py-3 font-medium">When</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.orders.map((row) => (
+                      <tr key={row.id} className="border-t border-border">
+                        <td className="px-4 py-3">{row.title}</td>
+                        <td className="px-4 py-3">{row.customerEmail || "—"}</td>
+                        <td className="px-4 py-3">{formatMoney(row.amountTotal, row.currency)}</td>
+                        <td className="px-4 py-3 capitalize">{row.status}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{formatWhen(row.createdAt)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+
+          <section className="flex flex-col gap-4">
             <h2 className="font-heading text-3xl tracking-tight">Hold requests</h2>
             {data.inquiries.length === 0 ? (
               <p className="text-muted-foreground">No holds yet. A request from a piece, or from the bag, shows up here.</p>
@@ -149,4 +193,16 @@ export function DeskBoard() {
       ) : null}
     </div>
   );
+}
+
+function formatMoney(amountCents: number, currency: string): string {
+  const normalized = currency || "USD";
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: normalized.toUpperCase(),
+    }).format(amountCents / 100);
+  } catch {
+    return `${(amountCents / 100).toFixed(2)} ${normalized.toUpperCase()}`;
+  }
 }

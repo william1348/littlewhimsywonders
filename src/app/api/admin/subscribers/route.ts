@@ -13,6 +13,7 @@ export async function GET(request: Request) {
       storage: data.storage,
       stage: data.stage,
       subscribers: data.subscribers,
+      orders: data.orders,
     });
   } catch (error) {
     return storeFailureResponse(error);

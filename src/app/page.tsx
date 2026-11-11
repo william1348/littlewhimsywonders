@@ -4,13 +4,13 @@ import { Suspense } from "react";
 import { HeroStickers } from "@/components/hero-stickers";
 import { HomeCarousel } from "@/components/home-carousel";
 import { ListForm } from "@/components/list-form";
-import { PieceCard } from "@/components/piece-card";
+import { CommissionIcon } from "@/components/commission-icon";
 import { buttonVariants } from "@/components/ui/button";
-import { featuredPieces } from "@/lib/catalog";
+import { collections } from "@/lib/catalog";
 import { cn } from "cn";
 
 export default function HomePage() {
-  const featured = featuredPieces();
+  const homeCollections = collections;
 
   return (
     <main>
@@ -27,8 +27,11 @@ export default function HomePage() {
             <Link href="/work" className={cn(buttonVariants({ size: "lg" }), "h-11 rounded-lg px-4")}>
               Browse the gallery
             </Link>
-            <Link href="/work/threshold-no-4" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-11 rounded-lg px-4")}>
-              View an art piece
+            <Link href="/studio" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-11 rounded-lg px-4")}>
+              <span className="inline-flex items-center gap-2">
+                <CommissionIcon className="text-foreground/65" />
+                Commission an art piece
+              </span>
             </Link>
           </div>
         </div>
@@ -43,14 +46,31 @@ export default function HomePage() {
 
       <section className="mx-auto w-full max-w-6xl px-5 pt-16 pb-20">
         <div className="mb-8 flex items-end justify-between gap-4">
-          <h2 className="font-heading text-3xl tracking-tight">Featured pieces</h2>
+          <h2 className="font-heading text-3xl tracking-tight">Collections</h2>
           <Link href="/work" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
-            View all pieces
+            View all collections
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((piece) => (
-            <PieceCard key={piece.slug} piece={piece} />
+          {homeCollections.map((collection) => (
+            <Link
+              key={collection.slug}
+              href={`/collections/${collection.slug}`}
+              className="group block rounded-xl bg-card p-5 ring-1 ring-foreground/10 shadow-[0_8px_20px_rgba(34,10,4,0.08)] transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              <div className="mb-4 overflow-hidden rounded-lg ring-1 ring-foreground/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={collection.items[0]?.image}
+                  alt={collection.items[0]?.title ?? collection.title}
+                  className="h-72 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] sm:h-80"
+                />
+              </div>
+              <h3 className="font-heading text-[1.75rem] tracking-tight text-burgundy">{collection.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-copper/85">
+                {collection.description}
+              </p>
+            </Link>
           ))}
         </div>
       </section>

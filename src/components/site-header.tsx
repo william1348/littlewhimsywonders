@@ -3,14 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { BagSheet } from "@/components/bag";
 import { cn } from "cn";
 
-const links = [
-  { href: "/work", label: "Work" },
-  { href: "/studio", label: "Studio" },
-  { href: "/desk", label: "Desk" },
-];
 const instagramUrl = "https://www.instagram.com/littlewhimsywonders/";
 
 export function SiteHeader() {
@@ -28,35 +22,36 @@ export function SiteHeader() {
           />
           <span>
             <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
-            <span className="mt-2 block text-xs tracking-[0.18em] text-copper uppercase">Rene Kiss | Handmade in Colorado</span>
+            <span className="mt-2 block text-xs tracking-[0.18em] text-copper uppercase">
+              <span className="ml-[1.5px] inline-block">Rene Kiss | </span>
+              Handmade in Colorado
+            </span>
           </span>
         </Link>
         <nav aria-label="Studio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
-          {links.map((link) => {
-            const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "text-sm underline-offset-4 hover:underline",
-                  active ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          <Link
+            href="/about"
+            aria-current={pathname === "/about" ? "page" : undefined}
+            className={cn(
+              "text-base underline-offset-4 hover:underline",
+              pathname === "/about" ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
+            )}
+          >
+            About
+          </Link>
           <a
             href={instagramUrl}
             target="_blank"
             rel="noreferrer"
-            className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="Instagram"
           >
-            Instagram
+            <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.8" />
+              <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
+              <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" />
+            </svg>
           </a>
-          <BagSheet />
         </nav>
       </div>
     </header>
