@@ -13,8 +13,13 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="border-b border-border bg-background shadow-[0_3px_14px_rgba(34,10,4,0.08)] md:shadow-none">
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
+    <header
+      className={cn(
+        "bg-background transition-shadow duration-350 ease-out md:shadow-none",
+        menuOpen ? "shadow-[0_10px_24px_rgba(34,10,4,0.13)]" : "shadow-[0_4px_14px_rgba(34,10,4,0.08)]",
+      )}
+    >
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-4 md:gap-4 md:py-5">
         <Link href="/" className="group flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -88,10 +93,10 @@ export function SiteHeader() {
           aria-label="Mobile studio"
           aria-hidden={!menuOpen}
           className={cn(
-            "w-full overflow-hidden transition-all duration-300 ease-out md:hidden",
+            "w-full overflow-hidden transition-all duration-350 ease-out md:hidden",
             menuOpen
-              ? "mt-2 max-h-52 translate-y-0 border-t border-border pt-3 opacity-100"
-              : "max-h-0 -translate-y-1 border-t border-transparent pt-0 opacity-0 pointer-events-none",
+              ? "mt-1 max-h-52 translate-y-0 pt-2 opacity-100"
+              : "max-h-0 -translate-y-1 pt-0 opacity-0 pointer-events-none",
           )}
         >
           <div className="flex flex-col gap-3">
