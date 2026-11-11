@@ -11,7 +11,9 @@
   --color-kraft: #dfb88d;
   --color-burgundy: #522028;
   --color-copper: #962e17;
-  --color-green: #5c6b4a;
+  --color-green: var(--green-original);
+  --color-green-original: var(--green-original);
+  --color-green-new: var(--green-new);
   --color-gold: #eab46f;
   --color-linework: #220a04;
   --color-oxide: var(--color-copper);
@@ -58,6 +60,8 @@
 }
 
 :root {
+  --green-original: #735123;
+  --green-new: #5c6b4a;
   --background: #f6e6d0;
   --foreground: #522028;
   --card: #dfb88d;
@@ -69,7 +73,7 @@
   --secondary: #dfb88d;
   --secondary-foreground: #522028;
   --muted: #e8c9a3;
-  --muted-foreground: #5c6b4a;
+  --muted-foreground: var(--green-original);
   --accent: #eab46f;
   --accent-foreground: #522028;
   --destructive: #962e17;
