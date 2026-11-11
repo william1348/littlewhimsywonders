@@ -19,7 +19,7 @@ export function SiteHeader() {
         menuOpen ? "shadow-[0_10px_24px_rgba(34,10,4,0.13)]" : "shadow-[0_4px_14px_rgba(34,10,4,0.08)]",
       )}
     >
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-4 md:gap-4 md:py-5">
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-5 pt-4 pb-3 md:gap-4 md:py-5">
         <Link href="/" className="group flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
