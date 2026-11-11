@@ -84,8 +84,17 @@ export function SiteHeader() {
             </svg>
           </a>
         </nav>
-        {menuOpen ? (
-          <nav aria-label="Mobile studio" className="mt-2 flex w-full flex-col gap-3 border-t border-border pt-3 md:hidden">
+        <nav
+          aria-label="Mobile studio"
+          aria-hidden={!menuOpen}
+          className={cn(
+            "w-full overflow-hidden transition-all duration-300 ease-out md:hidden",
+            menuOpen
+              ? "mt-2 max-h-52 translate-y-0 border-t border-border pt-3 opacity-100"
+              : "max-h-0 -translate-y-1 border-t border-transparent pt-0 opacity-0 pointer-events-none",
+          )}
+        >
+          <div className="flex flex-col gap-3">
             <Link
               href="/about"
               aria-current={pathname === "/about" ? "page" : undefined}
@@ -125,8 +134,8 @@ export function SiteHeader() {
                 Instagram
               </span>
             </a>
-          </nav>
-        ) : null}
+          </div>
+        </nav>
       </div>
     </header>
   );
