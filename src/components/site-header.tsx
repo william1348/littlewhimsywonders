@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 import { cn } from "cn";
 
@@ -9,6 +10,7 @@ const instagramUrl = "https://www.instagram.com/littlewhimsywonders/";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="border-b border-border bg-background">
@@ -28,7 +30,26 @@ export function SiteHeader() {
             </span>
           </span>
         </Link>
-        <nav aria-label="Studio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <button
+          type="button"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-muted-foreground md:hidden"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+            {menuOpen ? (
+              <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            ) : (
+              <>
+                <path d="M4 7h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M4 12h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </>
+            )}
+          </svg>
+        </button>
+        <nav aria-label="Studio" className="hidden flex-wrap items-center gap-x-5 gap-y-2 md:flex">
           <Link
             href="/about"
             aria-current={pathname === "/about" ? "page" : undefined}
@@ -63,6 +84,49 @@ export function SiteHeader() {
             </svg>
           </a>
         </nav>
+        {menuOpen ? (
+          <nav aria-label="Mobile studio" className="mt-2 flex w-full flex-col gap-3 border-t border-border pt-3 md:hidden">
+            <Link
+              href="/about"
+              aria-current={pathname === "/about" ? "page" : undefined}
+              className={cn(
+                "text-base underline-offset-4 hover:underline",
+                pathname === "/about" ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
+              )}
+              onClick={() => setMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              aria-current={pathname === "/contact" ? "page" : undefined}
+              className={cn(
+                "text-base underline-offset-4 hover:underline",
+                pathname === "/contact" ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
+              )}
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact
+            </Link>
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="w-fit text-muted-foreground hover:text-foreground"
+              aria-label="Instagram"
+              onClick={() => setMenuOpen(false)}
+            >
+              <span className="inline-flex items-center gap-2">
+                <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" aria-hidden="true">
+                  <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.8" />
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
+                  <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" />
+                </svg>
+                Instagram
+              </span>
+            </a>
+          </nav>
+        ) : null}
       </div>
     </header>
   );
