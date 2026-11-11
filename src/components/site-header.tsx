@@ -39,6 +39,16 @@ export function SiteHeader() {
           >
             About
           </Link>
+          <Link
+            href="/contact"
+            aria-current={pathname === "/contact" ? "page" : undefined}
+            className={cn(
+              "text-base underline-offset-4 hover:underline",
+              pathname === "/contact" ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
+            )}
+          >
+            Contact
+          </Link>
           <a
             href={instagramUrl}
             target="_blank"
