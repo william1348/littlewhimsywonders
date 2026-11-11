@@ -67,7 +67,7 @@ export default function HomePage() {
                 />
               </div>
               <h3 className="font-heading text-[1.75rem] tracking-tight text-burgundy">{collection.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-copper/85">
+              <p className="mt-3 text-sm leading-6 text-green/90">
                 {collection.description}
               </p>
             </Link>

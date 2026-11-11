@@ -59,7 +59,7 @@ export function WorkBrowser({ pieces, collections }: { pieces: Piece[]; collecti
                 className="block rounded-xl bg-card p-5 ring-1 ring-foreground/10 shadow-[0_8px_20px_rgba(34,10,4,0.08)] transition-transform duration-200 hover:-translate-y-0.5"
               >
                 <h3 className="font-heading text-[1.75rem] tracking-tight text-burgundy">{collection.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-copper/85">
+                <p className="mt-3 text-sm leading-6 text-green/90">
                   {collection.description}
                 </p>
               </Link>
