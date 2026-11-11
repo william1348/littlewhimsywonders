@@ -13,7 +13,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="border-b border-border bg-background">
+    <header className="border-b border-border bg-background shadow-[0_3px_14px_rgba(34,10,4,0.08)] md:shadow-none">
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
         <Link href="/" className="group flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}

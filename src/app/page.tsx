@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="mx-auto grid w-full max-w-6xl items-stretch gap-10 px-5 pt-3 pb-8 md:grid-cols-[1.3fr_0.7fr] md:pb-12">
+      <section className="mx-auto grid w-full max-w-6xl items-stretch gap-10 px-5 pt-6 pb-6 md:grid-cols-[1.3fr_0.7fr] md:pt-3 md:pb-12">
         <div>
           <h1 className="max-w-xl font-heading text-4xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
             <span className="block text-green">A world of whimsy through multi-medium art</span>
