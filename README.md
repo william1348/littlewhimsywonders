@@ -32,6 +32,7 @@ Set these variables before using card checkout:
 
 - `STRIPE_SECRET_KEY` (required for `/api/checkout` and checkout status verification)
 - `STRIPE_WEBHOOK_SECRET` (required for `/api/stripe/webhook` to persist paid/failed checkout status)
+- `STRIPE_AUTOMATIC_TAX` (optional, set `true` to enable Stripe automatic tax)
 - `STRIPE_SHIPPING_COUNTRIES` (optional, comma-separated ISO country codes, for example `US,CA`)
 - `STRIPE_TAX_CODE` (optional, Stripe product tax code applied to checkout line items)
 
