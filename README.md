@@ -26,23 +26,50 @@ Preview traffic is stored separately from production traffic, so a preview does 
 
 ## Stripe checkout setup
 
-Set these environment variables before using card checkout:
+### 1) App environment variables
 
-- `STRIPE_SECRET_KEY` (required for `/api/checkout`)
+Set these variables before using card checkout:
+
+- `STRIPE_SECRET_KEY` (required for `/api/checkout` and checkout status verification)
 - `STRIPE_WEBHOOK_SECRET` (required for `/api/stripe/webhook` to persist paid/failed checkout status)
 - `STRIPE_SHIPPING_COUNTRIES` (optional, comma-separated ISO country codes, for example `US,CA`)
 - `STRIPE_TAX_CODE` (optional, Stripe product tax code applied to checkout line items)
 
-Then configure a Stripe webhook endpoint to:
+### 2) Stripe dashboard webhook
+
+Configure a Stripe webhook endpoint:
 
 - `POST https://<your-domain>/api/stripe/webhook`
 
-Enable these events in Stripe:
+Enable these events:
 
 - `checkout.session.completed`
 - `checkout.session.async_payment_succeeded`
 - `checkout.session.async_payment_failed`
 - `checkout.session.expired`
+
+Copy the webhook signing secret from Stripe and set it as `STRIPE_WEBHOOK_SECRET`.
+
+### 3) Local POC test flow
+
+1. Run the app:
+
+   ```bash
+   npm run dev
+   ```
+
+2. In another terminal, forward Stripe webhooks locally:
+
+   ```bash
+   stripe listen --forward-to http://127.0.0.1:3847/api/stripe/webhook
+   ```
+
+3. Copy the `whsec_...` value printed by Stripe CLI into `STRIPE_WEBHOOK_SECRET`.
+4. Open a piece or collection page and click **Buy now with Stripe**.
+5. Use Stripe test card `4242 4242 4242 4242` with any future date/CVC.
+6. Confirm the result:
+   - Success banner appears on the return page.
+   - Order appears in `/desk` under **Card checkouts**.
 
 ## Contact form email setup (Zoho-compatible)
 

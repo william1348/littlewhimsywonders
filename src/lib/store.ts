@@ -181,6 +181,23 @@ export async function addOrder(input: {
   );
 }
 
+export async function getOrderStatusBySessionId(sessionId: string): Promise<OrderStatus | null> {
+  const id = sessionId.trim();
+  if (!id) return null;
+  const db = await database();
+  if (!db) {
+    return getOrderStatusBySessionIdFile(id);
+  }
+  const result = await db.query<{ status: OrderStatus }>(
+    `SELECT status
+     FROM orders
+     WHERE session_id = $1
+     LIMIT 1`,
+    [id],
+  );
+  return result.rows[0]?.status ?? null;
+}
+
 export async function listDesk(stage: Stage): Promise<{
   storage: StorageMode;
   stage: Stage;
@@ -418,6 +435,13 @@ async function addOrderFile(input: {
       data.orders.push(next);
     }
     await writeFileDb(data);
+  });
+}
+
+async function getOrderStatusBySessionIdFile(sessionId: string): Promise<OrderStatus | null> {
+  return withFile((data) => {
+    const row = data.orders.find((item) => item.sessionId === sessionId);
+    return row?.status ?? null;
   });
 }
 

@@ -56,7 +56,7 @@ export function CollectionViewer({ collection }: { collection: Collection }) {
           <CheckoutButton
             collectionSlug={collection.slug}
             itemId={selected.id}
-            label="Buy this item"
+            label="Buy now with Stripe"
             className="h-11 rounded-lg px-4"
           />
           <Link

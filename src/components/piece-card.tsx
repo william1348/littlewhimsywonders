@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { CheckoutButton } from "@/components/checkout-button";
 import { PrintArt } from "@/components/print-art";
 import type { Piece } from "@/lib/catalog";
 import { formatPrice } from "@/lib/format";
@@ -37,6 +38,7 @@ export function PieceCard({ piece }: { piece: Piece }) {
       >
         View details and purchase
       </Link>
+      <CheckoutButton pieceSlug={piece.slug} label="Buy now with Stripe" className="h-10 rounded-lg px-4" />
     </article>
   );
 }
