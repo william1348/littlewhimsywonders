@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="mx-auto grid w-full max-w-6xl items-stretch gap-10 px-5 pt-3 pb-8 md:grid-cols-[1.3fr_0.7fr] md:pb-12">
+      <section className="mx-auto grid w-full max-w-6xl items-stretch gap-10 px-5 pt-6 pb-6 md:grid-cols-[1.3fr_0.7fr] md:pt-3 md:pb-12">
         <div>
           <h1 className="max-w-xl font-heading text-4xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
             <span className="block text-green">A world of whimsy through multi-medium art</span>
@@ -35,7 +35,7 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <aside className="border-t border-border pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8">
+        <aside className="hidden border-t border-border pt-6 md:block md:border-t-0 md:border-l md:pt-0 md:pl-8">
           <HeroStickers />
         </aside>
       </section>
@@ -67,7 +67,7 @@ export default function HomePage() {
                 />
               </div>
               <h3 className="font-heading text-[1.75rem] tracking-tight text-burgundy">{collection.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-copper/85">
+              <p className="mt-3 text-sm leading-6 text-green/90">
                 {collection.description}
               </p>
             </Link>

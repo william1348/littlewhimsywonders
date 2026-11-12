@@ -11,6 +11,9 @@ export function SiteFooter() {
           <Link href="/about" className="text-base hover:text-foreground">
             About
           </Link>
+          <Link href="/contact" className="text-base hover:text-foreground">
+            Contact
+          </Link>
           <a href={instagramUrl} target="_blank" rel="noreferrer" className="hover:text-foreground" aria-label="Instagram">
             <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" aria-hidden="true">
               <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.8" />

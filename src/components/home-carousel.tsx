@@ -10,8 +10,10 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "cn";
 
 const LOOP = [...gallerySlides, ...gallerySlides];
+const MOBILE_SLIDES = gallerySlides.filter((slide) => slide.slug !== null);
 const FULL_SPEED = 36;
 const SPEED_MS = 500;
+const MOBILE_INTERVAL_MS = 4200;
 
 export function HomeCarousel() {
   const titleId = useId();
@@ -24,6 +26,7 @@ export function HomeCarousel() {
   const speedStartedRef = useRef(0);
   const pausedRef = useRef(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [mobileIndex, setMobileIndex] = useState(0);
   const open = openIndex !== null;
   const slide = openIndex === null ? null : gallerySlides[openIndex];
 
@@ -37,10 +40,17 @@ export function HomeCarousel() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobileViewport = window.matchMedia("(max-width: 767px)").matches;
     if (reduce) {
       setPaused(true);
       speedRef.current = 0;
       toSpeedRef.current = 0;
+      return;
+    }
+    if (mobileViewport) {
+      if (trackRef.current) {
+        trackRef.current.style.transform = "translate3d(0, 0, 0)";
+      }
       return;
     }
 
@@ -88,6 +98,16 @@ export function HomeCarousel() {
     setPaused(open);
   }, [open, setPaused]);
 
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || open) return;
+    if (MOBILE_SLIDES.length < 2) return;
+    const timer = window.setInterval(() => {
+      setMobileIndex((current) => (current + 1) % MOBILE_SLIDES.length);
+    }, MOBILE_INTERVAL_MS);
+    return () => window.clearInterval(timer);
+  }, [open]);
+
   const close = useCallback(() => setOpenIndex(null), []);
   const go = useCallback((direction: -1 | 1) => {
     setOpenIndex((current) => {
@@ -114,7 +134,26 @@ export function HomeCarousel() {
 
   return (
     <>
-      <section ref={sectionRef} aria-label="Studio photos" className="relative h-[320px] w-full overflow-hidden">
+      <section aria-label="Studio photos" className="relative h-[320px] w-full overflow-hidden md:hidden">
+        <div
+          className="flex h-full transition-transform duration-900 ease-out"
+          style={{ transform: `translate3d(-${mobileIndex * 100}%, 0, 0)` }}
+        >
+          {MOBILE_SLIDES.map((item) => (
+            <button
+              key={item.src}
+              type="button"
+              className="relative h-full w-full shrink-0 cursor-pointer overflow-hidden"
+              onClick={() => setOpenIndex(gallerySlides.findIndex((slideItem) => slideItem.src === item.src))}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={item.src} alt={item.alt} className="h-full w-full object-cover" />
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section ref={sectionRef} aria-label="Studio photos" className="relative hidden h-[320px] w-full overflow-hidden md:block">
         <div ref={trackRef} className="flex h-full w-max will-change-transform">
           {LOOP.map((item, index) => (
             <button

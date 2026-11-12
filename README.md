@@ -43,3 +43,15 @@ Enable these events in Stripe:
 - `checkout.session.async_payment_succeeded`
 - `checkout.session.async_payment_failed`
 - `checkout.session.expired`
+
+## Contact form email setup (Zoho-compatible)
+
+The `/contact` form sends messages via SMTP. Set:
+
+- `SMTP_HOST` (Zoho: `smtp.zoho.com`)
+- `SMTP_PORT` (Zoho SSL: `465`)
+- `SMTP_SECURE` (`true` for port 465)
+- `SMTP_USER` (the website mailbox address, for example `hello@littlewhimsywonders.com`)
+- `SMTP_PASS` (mailbox password or app password)
+- `CONTACT_TO_EMAIL` (where contact form messages should arrive)
+- `CONTACT_FROM_EMAIL` (optional; defaults to `SMTP_USER`)

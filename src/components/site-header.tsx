@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 import { cn } from "cn";
 
@@ -9,10 +10,16 @@ const instagramUrl = "https://www.instagram.com/littlewhimsywonders/";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="border-b border-border bg-background">
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
+    <header
+      className={cn(
+        "sticky top-0 z-50 mb-5 bg-background transition-shadow duration-350 ease-out",
+        menuOpen ? "shadow-[0_10px_24px_rgba(34,10,4,0.13)]" : "shadow-[0_4px_14px_rgba(34,10,4,0.08)]",
+      )}
+    >
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-5 pt-4 pb-3 md:gap-4 md:py-5">
         <Link href="/" className="group flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -28,7 +35,26 @@ export function SiteHeader() {
             </span>
           </span>
         </Link>
-        <nav aria-label="Studio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <button
+          type="button"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-muted-foreground md:hidden"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+            {menuOpen ? (
+              <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            ) : (
+              <>
+                <path d="M4 7h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M4 12h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </>
+            )}
+          </svg>
+        </button>
+        <nav aria-label="Studio" className="hidden flex-wrap items-center gap-x-5 gap-y-2 md:flex">
           <Link
             href="/about"
             aria-current={pathname === "/about" ? "page" : undefined}
@@ -38,6 +64,16 @@ export function SiteHeader() {
             )}
           >
             About
+          </Link>
+          <Link
+            href="/contact"
+            aria-current={pathname === "/contact" ? "page" : undefined}
+            className={cn(
+              "text-base underline-offset-4 hover:underline",
+              pathname === "/contact" ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
+            )}
+          >
+            Contact
           </Link>
           <a
             href={instagramUrl}
@@ -52,6 +88,58 @@ export function SiteHeader() {
               <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" />
             </svg>
           </a>
+        </nav>
+        <nav
+          aria-label="Mobile studio"
+          aria-hidden={!menuOpen}
+          className={cn(
+            "w-full overflow-hidden transition-all duration-350 ease-out md:hidden",
+            menuOpen
+              ? "mt-1 max-h-52 translate-y-0 pt-2 opacity-100"
+              : "max-h-0 -translate-y-1 pt-0 opacity-0 pointer-events-none",
+          )}
+        >
+          <div className="flex flex-col gap-3">
+            <Link
+              href="/about"
+              aria-current={pathname === "/about" ? "page" : undefined}
+              className={cn(
+                "text-base underline-offset-4 hover:underline",
+                pathname === "/about" ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
+              )}
+              onClick={() => setMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              aria-current={pathname === "/contact" ? "page" : undefined}
+              className={cn(
+                "text-base underline-offset-4 hover:underline",
+                pathname === "/contact" ? "text-foreground underline decoration-copper decoration-2" : "text-muted-foreground",
+              )}
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact
+            </Link>
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="w-fit text-muted-foreground hover:text-foreground"
+              aria-label="Instagram"
+              onClick={() => setMenuOpen(false)}
+            >
+              <span className="inline-flex items-center gap-2">
+                <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" aria-hidden="true">
+                  <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.8" />
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
+                  <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" />
+                </svg>
+                Instagram
+              </span>
+            </a>
+          </div>
         </nav>
       </div>
     </header>
