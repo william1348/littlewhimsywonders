@@ -41,12 +41,13 @@ export async function POST(request: Request) {
   const returnPath = piece ? `/work/${piece.slug}` : `/collections/${collectionSlug}`;
   const allowedShippingCountries = shippingCountries();
   const taxCode = stripeTaxCode();
+  const automaticTaxEnabled = stripeAutomaticTaxEnabled();
 
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer_creation: "always",
-      automatic_tax: { enabled: true },
+      ...(automaticTaxEnabled ? { automatic_tax: { enabled: true } } : {}),
       billing_address_collection: "required",
       line_items: [
         {
@@ -79,7 +80,7 @@ export async function POST(request: Request) {
     return json({ url: session.url });
   } catch (error) {
     console.error("checkout_failed", error);
-    return json({ message: "Checkout could not be started. Try again in a moment." }, 503);
+    return json({ message: "Checkout could not be started. Check STRIPE_SECRET_KEY and optional Stripe tax settings." }, 503);
   }
 }
 
@@ -93,6 +94,11 @@ function requestBaseUrl(request: Request): string {
 function stripeTaxCode(): string | null {
   const value = process.env.STRIPE_TAX_CODE?.trim();
   return value ? value : null;
+}
+
+function stripeAutomaticTaxEnabled(): boolean {
+  const value = process.env.STRIPE_AUTOMATIC_TAX?.trim().toLowerCase();
+  return value === "true";
 }
 
 function shippingCountries(): Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[] | null {
