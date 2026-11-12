@@ -98,9 +98,10 @@ function stripeTaxCode(): string | null {
 function shippingCountries(): Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[] | null {
   const raw = process.env.STRIPE_SHIPPING_COUNTRIES?.trim();
   if (!raw) return null;
-  const countries = raw
+  const values = raw
     .split(",")
     .map((value) => value.trim().toUpperCase())
-    .filter((value): value is Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry => Boolean(value));
+    .filter((value) => /^[A-Z]{2}$/.test(value));
+  const countries = [...new Set(values)] as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[];
   return countries.length > 0 ? countries : null;
 }

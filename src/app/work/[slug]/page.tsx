@@ -87,7 +87,7 @@ async function PieceBody({ params }: { params: Promise<{ slug: string }> }) {
         </dl>
         <p className="leading-relaxed">{piece.description}</p>
         <div className="flex flex-wrap items-center gap-3">
-          <CheckoutButton pieceSlug={piece.slug} label="Buy with card" className="h-11 rounded-lg px-4" />
+          <CheckoutButton pieceSlug={piece.slug} label="Buy now with Stripe" className="h-11 rounded-lg px-4" />
           <a href="#purchase-form" className={cn(buttonVariants({ size: "lg" }), "h-11 rounded-lg px-4")}>
             Purchase this piece
           </a>

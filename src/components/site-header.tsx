@@ -29,8 +29,8 @@ export function SiteHeader() {
               className="h-[68px] w-auto [filter:brightness(1.14)_drop-shadow(0_0_0.7px_rgba(34,10,4,0.45))_drop-shadow(0_1px_2px_rgba(82,32,40,0.22))]"
             />
             <span>
-              <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
-              <span className="mt-2 block text-xs tracking-[0.18em] text-copper uppercase">
+              <span className="block font-heading text-[2rem] leading-none tracking-tight md:text-3xl">Little Whimsy Wonders</span>
+              <span className="mt-2 block text-[0.62rem] tracking-[0.15em] text-copper uppercase md:text-xs md:tracking-[0.18em]">
                 <span className="ml-[1.5px] inline-block">Rene Kiss |</span>
                 <span className="ml-1 inline-block">Handmade in Colorado</span>
               </span>
