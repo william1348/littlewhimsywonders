@@ -26,7 +26,7 @@ export function SiteHeader() {
             <img
               src="/img/ghost-mushroom.png"
               alt=""
-              className="h-16 w-auto [filter:brightness(1.14)_drop-shadow(0_0_0.7px_rgba(34,10,4,0.45))_drop-shadow(0_1px_2px_rgba(82,32,40,0.22))]"
+              className="h-[68px] w-auto [filter:brightness(1.14)_drop-shadow(0_0_0.7px_rgba(34,10,4,0.45))_drop-shadow(0_1px_2px_rgba(82,32,40,0.22))]"
             />
             <span>
               <span className="block font-heading text-3xl leading-none tracking-tight">Little Whimsy Wonders</span>
